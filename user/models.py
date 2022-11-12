@@ -46,9 +46,11 @@ class CustomUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     gender = models.CharField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none), max_length=50)
-    birthdate = models.DateField()
-    department = models.CharField(choices=[x.value for x in DEPARTMENT], max_length=100)
-    profile_picture = models.ImageField(upload_to = 'profile_pictures/')
+    birthdate = models.DateField(null=True, )
+    department = models.CharField(
+        null=True, choices=[x.value for x in DEPARTMENT], max_length=100)
+    profile_picture = models.ImageField(
+        null=True, upload_to='profile_pictures/')
     role = models.CharField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest_without_venue), max_length=100)
 
     def __str__(self):
