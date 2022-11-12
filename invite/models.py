@@ -20,7 +20,7 @@ class Invite(models.Model):
     
     party_id = models.ForeignKey(Party, on_delete=models.CASCADE)
     guest_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    status = models.IntegerField(choices=[x.value for x in STATUS], null=True, default=STATUS.get_value(STATUS.invited), max_length=50)
+    status = models.IntegerField(choices=[x.value for x in STATUS], null=True, default=STATUS.get_value(STATUS.invited))
 
     plus_ones = models.IntegerField(default=0, null=True, blank=True)
 

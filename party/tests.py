@@ -17,7 +17,7 @@ class PartyTests(TestCase):
             birthdate = '2002-11-19',
             department = 1,
             profile_picture = '../user/profile_pictures/test_photo.png',
-            role=2
+            role=1
         )  
 
         cls.user_guest = get_user_model().objects.create_user(
@@ -28,7 +28,7 @@ class PartyTests(TestCase):
             gender = 1,
             birthdate = '2002-11-23',
             department = 3,
-            profile_picture = '../user/profile_pictures/test_photo2.png',
+            profile_picture = '../user/profile_pictures/test_photo2.jpg',
             role = 0
         )
 
@@ -40,7 +40,7 @@ class PartyTests(TestCase):
             gender=2,
             birthdate='2002-11-20',
             department=2,
-            profile_picture='../user/profile_pictures/test_photo3.png',
+            profile_picture='../user/profile_pictures/test_photo3.jpg',
             role=0
         )
 
@@ -63,7 +63,7 @@ class PartyTests(TestCase):
         self.assertEqual(self.invite.party_id.host_id.name, "Test Host")
         self.assertEqual(self.invite.party_id.host_id.department, 1)
         self.assertEqual(self.invite.party_id.host_id.birthdate, '2002-11-19')
-        self.assertEqual(self.invite.party_id.host_id.profile_picture, '../user/profile_pictures/test_photo.jpg')
+        self.assertEqual(self.invite.party_id.host_id.profile_picture, '../user/profile_pictures/test_photo.png')
         self.assertEqual(self.invite.party_id.host_id.role, 1)
         self.assertEqual(self.invite.party_id.flat, "123")
         self.assertEqual(self.invite.guest_id.name, "Test Guest")
