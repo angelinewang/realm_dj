@@ -18,9 +18,8 @@ class CustomUser(AbstractUser):
             return member.value[0]
         
     class ROLE(Enum):
-        guest_without_venue = (1, 'Guest without venue')
-        guest_with_venue = (2, 'Guest with venue')
-        host = (3, 'Host')
+        guest = (0, "Guest")
+        host = (1, 'Host')
 
         @classmethod
         def get_value(cls, member):
@@ -45,13 +44,13 @@ class CustomUser(AbstractUser):
     name = models.CharField(null=True, blank=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-    gender = models.CharField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none), max_length=50)
+    gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none), max_length=50)
     birthdate = models.DateField(null=True, )
-    department = models.CharField(
+    department = models.IntegerField(
         null=True, choices=[x.value for x in DEPARTMENT], max_length=100)
     profile_picture = models.ImageField(
         null=True, upload_to='profile_pictures/')
-    role = models.CharField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest_without_venue), max_length=100)
+    role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest), max_length=100)
 
     def __str__(self):
         return f"{self.id}: {self.name}"

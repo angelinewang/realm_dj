@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # 1st Party/My Apps
     'base',
     'user',
-    'venue',
     'party',
     'invite'
 ]
