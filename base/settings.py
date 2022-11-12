@@ -31,6 +31,9 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    # 3rd Party Apps
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +44,9 @@ INSTALLED_APPS = [
     # 1st Party/My Apps
     'base',
     'user',
+    'venue',
+    'party',
+    'invite'
 ]
 
 MIDDLEWARE = [

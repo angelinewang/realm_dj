@@ -12,6 +12,7 @@ mypy = "^0.990"
 autopep8 = "^2.0.0"
 pillow = "^9.3.0"
 psycopg2 = "^2.9.5"
+djangorestframework = "^3.14.0"
 
 
 [build-system]
