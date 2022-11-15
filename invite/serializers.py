@@ -2,36 +2,30 @@ from rest_framework import serializers
 from .models import Invite
 from django.contrib.auth import get_user_model
 from party.models import Party
+from rest_framework import mixins
 
 class HostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tag
-        fields = ("tag",)
+        model = get_user_model()
+        fields = ("name", "department", "birthdate", "profile_picture")
 
 class PartySerializer(serializers.ModelSerializer):
+    host_id = HostSerializer()
+
     class Meta:
-        model = get_user_model()
-        fields = ("username",)
+        model = Party
+        fields = ("id", "created_at", "host_id",
+                  "flat", "first_entry", "vibe", )
 
-class InviteSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
-    comments = CommentSerializer(read_only=True)
-    author = AuthorSerializer()
-
-    # Takes Database Model and converts into JSON and takes JSON and converts into a DB Model
+class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
     class Meta:
-        model = Post
-        fields = ("id", "author", "title", "body", "tags",
-                  "comments", "created_at", "updated_at")
-
+        model = Invite
+        fields = ("id", "created_at", "updated_at", "party_id", "guest_id", "status", "plus_ones")
+    
+    # Get the party_id by searching through all parties with first_entry no more than 12 hours after .now()
     def create(self, validated_data):
-        author_data = validated_data.pop("author")
-        (author, _) = get_user_model().objects.get_or_create(**author_data)
+        party_data = validated_data.pop("party_id")
+        (party_id, _) = get_user_model().objects.get(**party_data)
 
-        tags_data = validated_data.pop("tags")
-
-        for tag in tags_data:
-            (tags, _) = Tag.objects.get_or_create(**tag)
-
-        post = Post.objects.create(**validated_data, author=author, tags=tags)
-        return post
+        invite = Invite.objects.create(**validated_data, party_id=party_id)
+        return invite

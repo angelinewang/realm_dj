@@ -33,6 +33,7 @@ DEBUG = True
 INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
+    'jwt',
 
     'django.contrib.admin',
     'django.contrib.auth',

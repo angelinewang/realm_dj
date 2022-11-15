@@ -22,7 +22,7 @@ class Party(models.Model):
     # Default for first_entry should be right now, but user should also be allowed to add custom first_entry date/time
     # first_entry is entered in 2 parts: Date & Time through frontend
     # Then it is getting transformed into one DateTimeField to be saved into the database
-    first_entry = models.DateTimeField(auto_now_add=True, blank=True)
+    first_entry = models.DateTimeField()
     vibe = models.IntegerField(choices=[x.value for x in VIBE], null=True, default=VIBE.get_value(VIBE.chill))
 
     def __str__(self):

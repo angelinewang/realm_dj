@@ -18,7 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('api/invite/v1/', include("invite.urls")), # URL for Parties Page
     path('api/user/v1/', include("user.urls")), # URL for Guests & Profile 
+    path('api/party/v1/', include("party.urls")),  # URL for Posting Party
+
     path('api-auth/', include("rest_framework.urls")),
 ]
