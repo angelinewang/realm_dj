@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('parties/', views.PartiesList.as_view()),  # GET & POST 
+    path('invite/<int:pk>/', views.CreateInvite.as_view())
 ]

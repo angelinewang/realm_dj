@@ -11,6 +11,8 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 from rest_framework import mixins
+from rest_framework import permissions
+from  user.authentication import JWTAuthentication
 
 # Retrieve User model
 User = get_user_model()
@@ -21,6 +23,7 @@ User = get_user_model()
 class RegisterView(generics.CreateAPIView):
     # Signup Page
     serializer_class = UserSerializer
+    # permission_classes = [permissions.AllowAny]
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -55,6 +58,7 @@ class LoginView(generics.ListCreateAPIView):
         return Response({'token': token, 'message': f'Welcome back {user.username}!!'})
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+    # authentication_classes = [JWTAuthentication]
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
     # permission_classes = (permissions.IsAdminUser | IsAuthorOrReadOnly,)
@@ -63,5 +67,6 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMix
         return User.objects.partial_update(request, *args, **kwargs)
 
 class GuestsList(generics.ListAPIView):
+    # authentication_classes = [JWTAuthentication]
     queryset = User.objects.all()
     serializer_class = UserSerializer

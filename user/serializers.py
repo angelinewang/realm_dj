@@ -4,6 +4,8 @@ import django.contrib.auth.password_validation as validations
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 
+from rest_framework import permissions
+
 User = get_user_model()
 
 class UserLoginSerializer(serializers.ModelSerializer):
@@ -33,6 +35,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    permission_classes = [permissions.AllowAny]
     password = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True)
 
@@ -62,3 +65,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('name', 'birthdate', 'department', 'profile_picture', 'gender')
+
+class UserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('role',)

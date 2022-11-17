@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'realm_dj',
+        'NAME': 'realm_django',
         'USER': 'postgres',
         'PASSWORD': 'kittyKat7765',
         'HOST': 'localhost',
@@ -102,6 +102,15 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.AllowAny',
+    # ],
+    # JWTAuthentication added to each relevant view
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'user.authentication.JWTAuthentication'
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -145,3 +154,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:800",
+]

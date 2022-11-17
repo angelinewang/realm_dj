@@ -29,3 +29,20 @@ class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
 
         invite = Invite.objects.create(**validated_data, party_id=party_id)
         return invite
+
+class SendInviteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invite
+        fields = ("party_id",)
+    
+    def create(self, validated_data):
+        my_view = self.context['view']
+        object_id = my_view.kwargs.get('pk')
+
+        invite = Invite.objects.create(**validated_data, guest_id=object_id)
+        return invite 
+
+class UpdateInviteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invite
+        fields = ("status",)

@@ -5,6 +5,11 @@ from enum import Enum
 
 from django.contrib.auth.models import AbstractUser
 
+from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+# from rest_framework.authtoken.models import Token
+
 class CustomUser(AbstractUser):
 
     class GENDER(Enum):
@@ -45,10 +50,16 @@ class CustomUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none))
-    birthdate = models.DateField(null=True, )
+    birthdate = models.DateField(null=True)
     department = models.IntegerField(null=True, choices=[x.value for x in DEPARTMENT])
     profile_picture = models.ImageField(null=True, upload_to='profile_pictures/')
     role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest))
 
     def __str__(self):
         return f"{self.id}: {self.name}"
+
+
+# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# def create_auth_token(sender, instance=None, created=False, **kwargs):
+#     if created:
+#         Token.objects.create(user=instance)

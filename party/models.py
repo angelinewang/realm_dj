@@ -16,7 +16,7 @@ class Party(models.Model):
 
     created_at = models.DateTimeField(auto_now_add = True)
    
-    host_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     flat = models.CharField(max_length=50)
 
     # Default for first_entry should be right now, but user should also be allowed to add custom first_entry date/time

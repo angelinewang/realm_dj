@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Party
 from django.contrib.auth import get_user_model
-
+from user.serializers import UserProfileSerializer
 
 # class HostSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -12,8 +12,11 @@ class PartySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Party
-        fields = ("id", "created_at", "flat", "first_entry", "vibe", )
+        fields = ("id", "created_at", "flat", "first_entry", "vibe")
 
-    def create(self, request, **validated_data):
-        party = Party.objects.create(**validated_data, host_id=get_user_model(id=user))
-        return party
+    # def create(self, **validated_data):
+    #     # print(self.context['request'].user.id)
+
+    #     # host_id=self.context['request'].user.id
+    #     party = Party.objects.create(**validated_data)
+    #     return party
