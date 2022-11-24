@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.views.decorators.csrf import csrf_exempt
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -23,5 +25,5 @@ urlpatterns = [
     path('api/user/v1/', include("user.urls")), # URL for Guests & Profile 
     path('api/party/v1/', include("party.urls")),  # URL for Posting Party
 
-    path('api-auth/', include("rest_framework.urls")),
+    # path('api-auth/', include("rest_framework.urls")),
 ]

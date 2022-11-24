@@ -1,10 +1,11 @@
 from django.urls import path
 
+from django.views.decorators.csrf import csrf_exempt
 from . import views
 
 urlpatterns = [
-    path('signup/', views.RegisterView.as_view()), # POST only
-    path('login/', views.LoginView.as_view()), # GET & POST 
+    path('signup/', csrf_exempt(views.RegisterView.as_view())), # POST only
+    path('login/', csrf_exempt(views.LoginView.as_view()),), # GET & POST 
     path('profile/<int:pk>/', views.ProfileDetail.as_view()), # GET & POST 
     path('guests/', views.GuestsList.as_view()), # GET only 
 ]

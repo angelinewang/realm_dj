@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['kubernetes.docker.internal', 'localhost:8000']
 
 
 # Application definition
@@ -62,12 +62,22 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'base.urls'
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
+    "exp://10.40.195.102:19000",
+    "http://localhost:19002"
+    "http://localhost:19000",
     "http://localhost:8000",
     "https://mydeployedapplication.com"
 ]
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "exp://10.40.195.102:19000",
+    "http://localhost:19002",
+    "http://localhost:19000", 
+    "http://localhost:8000"
+]
+
+CSRF_COOKIE_NAME = "csrftoken"
 
 TEMPLATES = [
     {
@@ -155,6 +165,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:800",
+    "http://localhost:8000",
+    # "exp://10.40.195.102:19000",
+    # "http://localhost:19002",
+    # "http://localhost:19000",
 ]
+
+CSRF_COOKIE_SECURE = False
+
+CSRF_COOKIE_HTTPONLY = False
+
+SESSION_COOKIE_SECURE = False

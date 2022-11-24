@@ -1,8 +1,6 @@
 from django.db import models
 from enum import Enum
-
 # Create your models here.
-
 from django.contrib.auth.models import AbstractUser
 
 from django.conf import settings
@@ -11,7 +9,6 @@ from django.db.models.signals import post_save
 # from rest_framework.authtoken.models import Token
 
 class CustomUser(AbstractUser):
-
     class GENDER(Enum):
         none = (0, 'None')
         male = (1, 'Male')
@@ -46,6 +43,7 @@ class CustomUser(AbstractUser):
         def get_value(cls, member):
             return member.value[0]
 
+    username = models.CharField(null=True, unique=True, max_length=50)
     name = models.CharField(null=True, blank=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
