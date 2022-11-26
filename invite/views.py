@@ -11,11 +11,33 @@ from .serializers import UpdateInviteSerializer
 from .models import Party
 from user.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
-
+from .serializers import HostSerializer
+from .serializers import PartySerializer
+from django.views.generic import DetailView
+from django.shortcuts import HttpResponse, get_object_or_404
+from django.http import Http404
+from rest_framework.decorators import api_view
 # Create your views here.
 
-class PartiesList(generics.ListAPIView):
-    queryset = Invite.objects.all()
+class PartiesInvitedList(generics.ListAPIView):
+    queryset = Invite.objects.filter(status=0)
+    serializer_class = InviteSerializer
+    # authentication_classes = [JWTAuthentication]
+
+class HostView(generics.RetrieveAPIView):
+    serializer_class = HostSerializer
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(get_user_model(), id=pk)
+
+class PartyView(generics.RetrieveAPIView):
+    serializer_class = PartySerializer
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Party, id=pk)
+
+class PartiesConfirmedList(generics.ListAPIView):
+    queryset = Invite.objects.filter(status=1)
     serializer_class = InviteSerializer
     # authentication_classes = [JWTAuthentication]
 

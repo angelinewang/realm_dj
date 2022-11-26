@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['kubernetes.docker.internal', 'localhost:8000']
+ALLOWED_HOSTS = [
+    '335b-82-0-186-223.eu.ngrok.io',
+    'kubernetes.docker.internal', 'localhost:8000', "http://localhost:3000",
+                 "exp://10.40.195.102:19000",
+                 "http://localhost:19002",
+                 "http://localhost:19000",
+                 "http://localhost:8000", "localhost", 'localhost']
 
 
 # Application definition
@@ -34,6 +40,8 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
     'jwt',
+
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,16 +65,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ORIGIN_WHITELIST = [
     "exp://10.40.195.102:19000",
-    "http://localhost:19002"
-    "http://localhost:19000",
-    "http://localhost:8000",
-    "https://mydeployedapplication.com"
+    'http://localhost:19002'
+    'http://localhost:19000',
+    'http://localhost:8000',
+    "https://mydeployedapplication.com",
+    'http://192.168.0.17:19000',
+    'exp://192.168.0.17:19000',
+    'http://localhost:3000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -74,7 +88,8 @@ CSRF_TRUSTED_ORIGINS = [
     "exp://10.40.195.102:19000",
     "http://localhost:19002",
     "http://localhost:19000", 
-    "http://localhost:8000"
+    "http://localhost:8000",
+    "exp://192.168.0.17:19000",
 ]
 
 CSRF_COOKIE_NAME = "csrftoken"
@@ -169,9 +184,11 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
-    # "exp://10.40.195.102:19000",
-    # "http://localhost:19002",
-    # "http://localhost:19000",
+    "exp://10.40.195.102:19000",
+    "http://localhost:19002",
+    "http://192.168.0.17:19000",
+    "exp://192.168.0.17:19000",
+    "http://localhost:19000",
 ]
 
 CSRF_COOKIE_SECURE = False

@@ -7,11 +7,9 @@ from rest_framework import mixins
 class HostSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ("name", "department", "birthdate", "profile_picture")
+        fields = ("id", "name", "department", "birthdate", "profile_picture")
 
 class PartySerializer(serializers.ModelSerializer):
-    host_id = HostSerializer()
-
     class Meta:
         model = Party
         fields = ("id", "created_at", "host_id",
