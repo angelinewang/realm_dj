@@ -9,6 +9,12 @@ class HostSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ("id", "name", "department", "birthdate", "profile_picture")
 
+class GuestSerializer(serializers.ModelSerializer):
+    # Serializer for Guest Profile from Guestlist Page
+    class Meta:
+        model = get_user_model()
+        fields = ("id", "name", "department", "birthdate", "profile_picture")
+
 class PartySerializer(serializers.ModelSerializer):
     class Meta:
         model = Party

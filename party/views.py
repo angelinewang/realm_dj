@@ -11,6 +11,10 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from user.serializers import UserRoleSerializer
 from user.authentication import JWTAuthentication
+from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
+
+
+from party.serializers import PartySerializer
 
 # Create your views here.
 
@@ -34,7 +38,10 @@ class PartyPost(generics.CreateAPIView, mixins.CreateModelMixin, mixins.UpdateMo
             return Response({'message': 'Party Posted'})
         return Response(serializer.errors, status=422)
 
-
+# WORKING 
+# 1. Grabs the User_id from the url
+# 2. Finds all the parties whose host_id is the user_id
+# 3. Returns the last/most recent party 
 
 # Invites page
 # Confirmed page

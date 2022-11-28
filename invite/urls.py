@@ -10,5 +10,14 @@ urlpatterns = [
     path('parties/party/<int:pk>/', views.PartyView.as_view()),  # GET & POST
 
     path('parties/confirmed', views.PartiesConfirmedList.as_view()),  # GET & POST
-    path('invite/<int:pk>/', views.CreateInvite.as_view())
+    path('invite/<int:pk>/', views.CreateInvite.as_view()),
+
+# 1. Get the party 2. Get the invites 3. Get the guest profiles
+    # Invites according to Party ID
+
+    # #2 Guestlist Invites from Party_id
+    path('guestlist/<int:pk>/', views.GuestlistInvites.as_view()),
+    
+    #  #3 User profile according to guest_id s
+    path('guestlist/guest/<int:pk>/', views.GuestlistGuest.as_view()),
 ]

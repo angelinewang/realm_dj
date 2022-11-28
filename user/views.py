@@ -66,7 +66,11 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMix
     def patch(request, *args, **kwargs):
         return User.objects.partial_update(request, *args, **kwargs)
 
-class GuestsList(generics.ListAPIView):
+class GuestsBrowse(generics.ListAPIView):
     # authentication_classes = [JWTAuthentication]
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    # If user state is set to 'host', ensure that the guests are not associated with a invite already to the party
+
+    # If user state is set to 'guest', prompt user to create a party
+

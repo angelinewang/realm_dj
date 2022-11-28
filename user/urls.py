@@ -7,5 +7,5 @@ urlpatterns = [
     path('signup/', csrf_exempt(views.RegisterView.as_view())), # POST only
     path('login/', csrf_exempt(views.LoginView.as_view()),), # GET & POST 
     path('profile/<int:pk>/', views.ProfileDetail.as_view()), # GET & POST 
-    path('guests/', views.GuestsList.as_view()), # GET only 
+    path('guests/browse', views.GuestsBrowse.as_view()), # GET only 
 ]

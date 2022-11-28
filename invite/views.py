@@ -11,12 +11,13 @@ from .serializers import UpdateInviteSerializer
 from .models import Party
 from user.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
-from .serializers import HostSerializer
+from .serializers import HostSerializer, GuestSerializer
 from .serializers import PartySerializer
 from django.views.generic import DetailView
-from django.shortcuts import HttpResponse, get_object_or_404
+from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
 from django.http import Http404
 from rest_framework.decorators import api_view
+
 # Create your views here.
 
 class PartiesInvitedList(generics.ListAPIView):
@@ -113,3 +114,42 @@ class CheckinInvite(generics.UpdateAPIView):
 # Invites page
 # Confirmed page
 # Guestlist page
+
+# WORKING 
+# Grabs the Party_id from the URL
+# Lists the Invites with the Party_id
+class GuestlistInvites(generics.ListAPIView):
+    serializer_class = InviteSerializer
+
+    def get_queryset(self, *args, **kwargs):
+    # From the Host User ID, get the Party, then get the invites from the Party 
+        pk = self.kwargs.get('pk')
+        parties = Party.objects.filter(host_id=pk)
+        myParty = parties.order_by('created_at').last()
+        return get_list_or_404(Invite, party_id=myParty.id)
+
+# Grabs the User_id from the URL
+# Retrieves the User Profile with the id equivalent
+class GuestlistGuest(generics.RetrieveAPIView):
+    serializer_class = GuestSerializer
+
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(get_user_model(), id=pk)
+
+    # User party is grabbed from the frontend, because when calling the guestlist page, need the party ID
+
+# Grab the party by the current user first
+
+# From the party, grab the invites
+
+# From the invites, grab the invites that are confirmed
+
+# From the confirmed invites, grab the guests from the invites 
+
+# Render the guest profiles from the invites 
+
+    # authentication_classes = [JWTAuthentication]
+
+
+# Serialiser the Guest Profile, from the invite (which has a certain party id, which is tied to the user/host)
