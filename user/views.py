@@ -16,6 +16,7 @@ from  user.authentication import JWTAuthentication
 from django.shortcuts import get_list_or_404, get_object_or_404
 from party.models import Party 
 from invite.models import Invite
+from invite.serializers import InviteSerializer
 
 # Retrieve User model
 User = get_user_model()
@@ -69,29 +70,68 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMix
     def patch(request, *args, **kwargs):
         return User.objects.partial_update(request, *args, **kwargs)
 
-class GuestsBrowse(generics.ListAPIView):
+class GuestsBrowseGuestMode(generics.ListAPIView):
     serializer_class = UserSerializer
+
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        print(User.objects.get(id=pk).role)
+
+        return User.objects.exclude(id=pk)
+        # print(User.objects.get(id=pk).role)
         
-        role = User.objects.get(id=pk).role
-        if role == 0:
-          return User.objects.exclude(id=pk)
+        # role = User.objects.get(id=pk).role
+        # if role == 0:
 
-#         if role == 1:
-#             parties = Party.objects.filter(host_id=pk)
-#             myParty = parties.order_by('created_at').last()
-#             existingInvites = get_list_or_404(Invite, party_id=myParty.id)
+class ExistingInvitesView(generics.ListAPIView):
+    serializer_class = InviteSerializer
+    def get_queryset(self, *args, **kwargs):
+        party = self.kwargs.get('party')
+        existingInvites = get_list_or_404(Invite, party_id=party)
 
-#             existingGuestsIds = []
-#             for i in existingInvites:
-#                 existingGuestsIds.append(existingInvites[i].guest_id_id)
-#             # 1. Find Most Recent Party
-#             # 2. Find all invites with the party id 
-#             # 3. Find all the guest_ids on those invites
-#             # 4. None of the objects gotten can contain ids same as any of those guest_ids
-#             return User.objects.get(id!=pk, id not in existingGuestsIds)
+class GuestsBrowseHostMode(generics.ListAPIView):
+    serializer_class = UserSerializer
+# Whether user is host is determined on frontend
+    def get_queryset(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        party = self.kwargs.get('party')
+        existingInvites = get_list_or_404(Invite, party_id=party)
+        
+        existingGuests = []
+        for v in existingInvites:
+            # Appends the guest ids of all the invites to a list
+            existingGuests.append(v.guest_id_id)
+            if len(existingGuests) == len(existingInvites):
+                # User.objects.filter()
+                return User.objects.exclude(id=pk).exclude(id__in=existingGuests)
+        
+        
+
+            # print(existingGuests)
+        # guest = existingInvites[0].guest_id_id
+        # print(guest)
+
+        # print(User.objects.get(id=pk).role)
+
+        # role = User.objects.get(id=pk).role
+
+            # parties = Party.objects.filter(host_id=pk)
+            # myParty = parties.order_by('created_at').last()
+            
+            # existingInvites = get_list_or_404(Invite, party_id=myParty.id)
+
+            # print(existingInvites)
+            # existingGuestsIds = []
+            # for i in existingInvites:
+            #     existingGuestsIds.append(existingInvites[i])
+            #     print(i)
+            # 1. Find Most Recent Party
+            # 2. Find all invites with the party id 
+            # 3. Find all the guest_ids on those invites
+            # 4. None of the objects gotten can contain ids same as any of those guest_ids
+                
+                # return User.objects.exclude(id in existingGuestsIds or pk)
+            # Should not display user's own profile or any profiles associated with invited to their parties
+            # This should only display bob right now
         
 # # If user is not a host, Get all users that are not the user themselves
       

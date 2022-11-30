@@ -25,4 +25,4 @@ class Invite(models.Model):
     plus_ones = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.flat}"
+        return f"{self.guest_id} invited to {self.party_id}"
