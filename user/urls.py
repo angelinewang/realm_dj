@@ -14,7 +14,7 @@ urlpatterns = [
     path('guests/browse/<int:party>/existinginvites/',
          views.ExistingInvitesView.as_view()),
     
-    path('guests/browse/<int:pk>/hostmode/<int:party>/', views.GuestsBrowseHostMode.as_view()),
+    path('guests/browse/<int:pk>/hostmode/', views.GuestsBrowseHostMode.as_view()),
     # 00. Get the User Role 0. Get the party 1. Get the Existing Invites 2. Then gets the Users not part of the existing invites 
 
     # First param is the User ID, Second param is the Party ID

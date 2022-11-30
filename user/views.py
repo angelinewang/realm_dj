@@ -92,19 +92,33 @@ class GuestsBrowseHostMode(generics.ListAPIView):
     serializer_class = UserSerializer
 # Whether user is host is determined on frontend
     def get_queryset(self, *args, **kwargs):
+
+        
         pk = self.kwargs.get('pk')
-        party = self.kwargs.get('party')
-        existingInvites = get_list_or_404(Invite, party_id=party)
+        parties = get_list_or_404(Party, host_id=pk)
+
+        party = parties.pop()
+
+        party_id = party.id
+        # print(party_id)
+        # party = self.kwargs.get('party')
+
+        existingInvites = Invite.objects.filter(party_id_id=party_id).count()
         
-        existingGuests = []
-        for v in existingInvites:
-            # Appends the guest ids of all the invites to a list
-            existingGuests.append(v.guest_id_id)
-            if len(existingGuests) == len(existingInvites):
-                # User.objects.filter()
-                return User.objects.exclude(id=pk).exclude(id__in=existingGuests)
+/
+        if existingInvites == 0:
+            return User.objects.exclude(id=pk)
         
-        
+        else:
+            existingGuests = []
+            for v in Invite.objects.filter(party_id_id=party_id):
+                # Appends the guest ids of all the invites to a list
+                existingGuests.append(v.guest_id_id)
+                if len(existingGuests) == len(Invite.objects.filter(party_id_id=party_id)):
+                    # User.objects.filter()
+                    return User.objects.exclude(id=pk).exclude(id__in=existingGuests)
+            
+            
 
             # print(existingGuests)
         # guest = existingInvites[0].guest_id_id
