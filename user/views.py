@@ -105,7 +105,7 @@ class GuestsBrowseHostMode(generics.ListAPIView):
 
         existingInvites = Invite.objects.filter(party_id_id=party_id).count()
         
-/
+        print(existingInvites)
         if existingInvites == 0:
             return User.objects.exclude(id=pk)
         
