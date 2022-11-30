@@ -21,9 +21,11 @@ from rest_framework.decorators import api_view
 # Create your views here.
 
 class PartiesInvitedList(generics.ListAPIView):
-    queryset = Invite.objects.filter(status=0)
     serializer_class = InviteSerializer
-    # authentication_classes = [JWTAuthentication]
+
+    def get_queryset(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_list_or_404(Invite, status=0, guest_id=pk)
 
 class HostView(generics.RetrieveAPIView):
     serializer_class = HostSerializer
@@ -38,9 +40,11 @@ class PartyView(generics.RetrieveAPIView):
         return get_object_or_404(Party, id=pk)
 
 class PartiesConfirmedList(generics.ListAPIView):
-    queryset = Invite.objects.filter(status=1)
     serializer_class = InviteSerializer
-    # authentication_classes = [JWTAuthentication]
+
+    def get_queryset(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        return get_list_or_404(Invite, status=1, guest_id=pk)
 
 class CreateInvite(generics.CreateAPIView, mixins.UpdateModelMixin, mixins.CreateModelMixin):
     queryset = Invite.objects.all()
