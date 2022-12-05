@@ -37,15 +37,15 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     permission_classes = [permissions.AllowAny]
     password = serializers.CharField(write_only=True)
-    password_confirmation = serializers.CharField(write_only=True)
+    # password_confirmation = serializers.CharField(write_only=True)
 
     def validate(self, data):
         password = data.pop('password')
-        password_confirmation = data.pop('password_confirmation')
+        # password_confirmation = data.pop('password_confirmation')
 
-        if password != password_confirmation:
-            raise serializers.ValidationError(
-                {'password_confirmation': 'Passwords do not match!'})
+        # if password != password_confirmation:
+        #     raise serializers.ValidationError(
+        #         {'password_confirmation': 'Passwords do not match!'})
 
         # This will check for a complex/secure password
         # try:
@@ -53,20 +53,50 @@ class UserSerializer(serializers.ModelSerializer):
         # except ValidationError as err:
         #     raise serializers.ValidationError({'password': err.messages})
 
+        # Creates a Hash from the string Password entered by user and stores the password as a Hash
         data['password'] = make_password(password)
         return data
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'password', 'password_confirmation', 'name',
-                  'birthdate', 'department', 'profile_picture', 'gender', 'role')
+        fields = ('id', 'email', 'password', 'name',
+                  'birthdate', 'department', 'profile_picture', 'gender')
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    # Used to fetch User Role, Host Profile, and User Profile Page
     class Meta:
         model = User
-        fields = ('name', 'birthdate', 'department', 'profile_picture', 'gender')
+        fields = ('name', 'birthdate', 'department', 'profile_picture', 'gender', 'role')
 
 class UserRoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('role',)
+
+class UserSignUpSerializer(serializers.ModelSerializer):
+    permission_classes = [permissions.AllowAny]
+    password = serializers.CharField(write_only=True)
+    # password_confirmation = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        password = data.pop('password')
+        # password_confirmation = data.pop('password_confirmation')
+
+        # if password != password_confirmation:
+        #     raise serializers.ValidationError(
+        #         {'password_confirmation': 'Passwords do not match!'})
+
+        # This will check for a complex/secure password
+        # try:
+        #     validations.validate_password(password=password)
+        # except ValidationError as err:
+        #     raise serializers.ValidationError({'password': err.messages})
+
+        # Creates a Hash from the string Password entered by user and stores the password as a Hash
+        data['password'] = make_password(password)
+        return data
+
+    class Meta:
+        model = User
+        fields = ('email', 'password', 'name',
+                  'birthdate', 'department', 'gender')

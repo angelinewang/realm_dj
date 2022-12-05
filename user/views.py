@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from .serializers import UserLoginSerializer
-from .serializers import UserProfileSerializer, UserRoleSerializer
+from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
@@ -26,10 +26,34 @@ User = get_user_model()
 
 class RegisterView(generics.CreateAPIView):
     # Signup Page
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     # permission_classes = [permissions.AllowAny]
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserSignUpSerializer(data=request.data)
+
+        # Checks if a row of data with the same email already exists in the database
+        # UNIQUE Constraint added to the "email" column of user_customuser table
+        # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
+        # print(request.data.get('email'))
+        email = request.data.get('email')
+        password = request.data.get('password')
+        birthdate = request.data.get('birthdate')
+        department = request.data.get('department')
+        gender = request.data.get('gender')
+        name = request.data.get('name')
+
+        print(email)
+        print(password)
+        print(birthdate)
+        print(department)
+        print(gender)
+        print(name)
+
+        # Birthdate must be in the format: YYYY-MM-DD
+
+        # user = self.get_user(email)
+
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Registration Successful'})
