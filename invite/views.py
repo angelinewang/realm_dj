@@ -62,7 +62,7 @@ class CreateInvite(generics.CreateAPIView, mixins.UpdateModelMixin, mixins.Creat
         # And the guest_id is the id in the API URL
 
         serializer = SendInviteSerializer(data=request.data)
-        
+        print(request.user.role)
         if request.user.role == 1 and serializer.is_valid():
             # Passing authenticated user id as foreign key
             serializer.save(party_id=Party.objects.get(host_id=request.user.id), guest_id=get_user_model().objects.get(id=object_id))

@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 from user.serializers import UserRoleSerializer
 from user.authentication import JWTAuthentication
 from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
-
+from django.core.exceptions import PermissionDenied
 
 from party.serializers import PartySerializer
 
@@ -27,15 +27,26 @@ class PartyPost(generics.CreateAPIView, mixins.CreateModelMixin, mixins.UpdateMo
 
         serializer = PartySerializer(data=request.data)
 
-        User = get_user_model().objects.get(id=request.user.id)
+        pk = self.kwargs.get('pk')
+        User = get_user_model().objects.get(id=pk)
+
+        # User = get_user_model().objects.get(id=request.user.id)
 
         roleSerializer = UserRoleSerializer(User, data=request.data)
-        if serializer.is_valid():
+
+        # If User role is currently set to Host, raise exception that permission is denied 
+        if User.role == 1:
+            raise PermissionDenied() 
+            # 403 Forbidden
+     
+        elif serializer.is_valid():
             # Passing authenticated user id as foreign key
-            serializer.save(host=request.user)
+            # serializer.save(host=request.user)
+            serializer.save(host=User)
             if roleSerializer.is_valid():
                 roleSerializer.save(role=1)
             return Response({'message': 'Party Posted'})
+
         return Response(serializer.errors, status=422)
 
 # WORKING 

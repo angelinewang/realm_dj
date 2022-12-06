@@ -7,7 +7,11 @@ urlpatterns = [
     path('signup/', csrf_exempt(views.RegisterView.as_view())), # POST only
     path('login/', csrf_exempt(views.LoginView.as_view()),), # GET & POST 
     path('profile/<int:pk>/', views.ProfileDetail.as_view()), # GET & POST 
-    
+    # GETs the last party associated with user and sends ONLY the first entry as response 
+    path('firstentry/<int:pk>/', views.FirstEntryView.as_view()),
+
+
+    path('changerole/<int:pk>/', views.RoleChangeView.as_view()),
     path('guests/browse/<int:pk>/guestmode/', views.GuestsBrowseGuestMode.as_view()), # GET only, when user state is guest
     # GET only, when user state is guest
 

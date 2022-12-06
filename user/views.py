@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from .serializers import UserLoginSerializer
-from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer
+from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer, FirstEntrySerializer
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
@@ -18,6 +18,10 @@ from party.models import Party
 from invite.models import Invite
 from invite.serializers import InviteSerializer
 
+from datetime import datetime, timedelta
+import pytz
+
+utc=pytz.UTC
 # Retrieve User model
 User = get_user_model()
 # Default user model from Django Admin
@@ -85,14 +89,116 @@ class LoginView(generics.ListCreateAPIView):
 
         return Response({'token': token, 'message': f'Welcome back {user.username}!!'})
 
+
+class FirstEntryView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+    # 1. Grab the last party associated to the user 
+    # 2. Use the FirstEntrySerialiser to only send back the first entry of the party 
+    # 3. Respond with True or False of last entry being over 
+    serializer_class = FirstEntrySerializer
+    def get(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        parties = Party.objects.filter(host_id=pk)
+        myParty = parties.order_by('created_at').last()
+
+        naiveNow = datetime.now() # datetime.now() is "aware": It has reference to UTC time zone in the end
+
+        # first_entry is "naive"
+        last_entry = myParty.first_entry + timedelta(hours=12)
+        print("FIRST ENTRY:")
+        print(myParty.first_entry)
+        print("LAST ENTRY:")
+        print(last_entry)
+
+        # Changed "now" from "naive" to "aware"
+        awareNow = utc.localize(naiveNow)
+        print("NOW:")
+        print(awareNow)
+
+        if last_entry < awareNow:
+            passed_last_entry = True 
+        # If last entry has passed
+            return Response(passed_last_entry)
+        elif last_entry > awareNow:
+            # If last entry is is still in future: Do not change the user role and return the user data as is
+            passed_last_entry = False
+            return Response(passed_last_entry)
+
+class RoleChangeView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+    
+    serializer_class = UserRoleSerializer
+    def get_queryset(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        get_user_model().objects.filter(id=pk).update(role=0)
+
+        return get_user_model().objects.filter(id=pk)
+
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     # authentication_classes = [JWTAuthentication]
+
+    # Before sending user details back in response: Check is the user's role is Host. 
+    # If yes, check the last party with host_id of the user. 
+    # Then check if the first_entry of that party is more than 12 hours ahead of current time 
+    # If yes, then change the user role to Guest. 
+
+    # queryset = User.objects.all()
+    # <int:pk> set at the URL automatically means this View only gets one profile: That of the user indicated
+    # Do not need to specify it inside this class
+
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
+
+    # def get_queryset(self, *args, **kwargs):
+
+    #     pk = self.kwargs.get('pk')
+    #     return get_object_or_404(get_user_model(), id=pk)
+
+        # serializer = UserProfileSerializer(data=User)
+
+        # if serializer.is_valid() and User.role == 1: 
+        #     # Find Party 
+        #     parties = Party.objects.filter(host_id=pk)
+        #     myParty = parties.order_by('created_at').last()
+        #     # Check time of Party
+        #     naiveNow = datetime.now() # datetime.now() is "aware": It has reference to UTC time zone in the end
+    
+        #     # first_entry is "naive"
+        #     last_entry = myParty.first_entry + timedelta(hours=12)
+        #     print("FIRST ENTRY:") 
+        #     print(myParty.first_entry)
+        #     print("LAST ENTRY:")
+        #     print(last_entry)
+
+        #     # Changed "now" from "naive" to "aware"
+        #     awareNow = utc.localize(naiveNow)
+        #     print("NOW:")
+        #     print(awareNow)
+
+        #     if last_entry < awareNow:
+        #     # If last entry has passed
+        #         # roleSerializer = UserRoleSerializer(User, data=User)
+        #         if serializer.is_valid():
+        #             serializer.save(role=0)
+        #             return Response({'message': 'Role Changed'})
+        #             return get_object_or_404(get_user_model(), id=pk)
+        #     elif last_entry > awareNow:
+        #         # If last entry is is still in future: Do not change the user role and return the user data as is
+        #         return get_object_or_404(get_user_model(), id=pk)
+            
+        # elif User.role == 0:
+        #     # If user role is guest, just return the User Info as present
+        #     return get_user_model().objects.get(id=pk)
+            # Change the user role to guest, and post it to the backend
+            # Before sending back to the frontend the profile details
+
+        # 1. Change the user Role 
+        # 2. Return User Profile
+
+
+
     # permission_classes = (permissions.IsAdminUser | IsAuthorOrReadOnly,)
     # Comma says that this is a Tuple, but there is only one item -- Tuples are iterable and things in parentheses are not iterable -- If just parentheses without a comma: Then think you are just using then to tidy up code, does not know it is a Tuple
-    def patch(request, *args, **kwargs):
-        return User.objects.partial_update(request, *args, **kwargs)
+    # def patch(request, *args, **kwargs):
+    #     return User.objects.partial_update(request, *args, **kwargs)
 
 class GuestsBrowseGuestMode(generics.ListAPIView):
     serializer_class = UserSerializer
@@ -116,7 +222,6 @@ class GuestsBrowseHostMode(generics.ListAPIView):
     serializer_class = UserSerializer
 # Whether user is host is determined on frontend
     def get_queryset(self, *args, **kwargs):
-
         
         pk = self.kwargs.get('pk')
         parties = get_list_or_404(Party, host_id=pk)
