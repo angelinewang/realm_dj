@@ -14,9 +14,19 @@ from user.authentication import JWTAuthentication
 from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
 from django.core.exceptions import PermissionDenied
 
-from party.serializers import PartySerializer
+from party.serializers import PartySerializer, PartyIdSerializer
 
-# Create your views here.
+class MyPartiesView(generics.ListAPIView):
+    serializer_class = PartyIdSerializer
+ 
+    def get_queryset(self, *args, **kwargs):
+        # From the Host User ID, get the Party, and return just the party id 
+        pk = self.kwargs.get('pk')
+        parties = Party.objects.filter(host_id=pk).order_by('created_at')
+        
+        # Send all my parties and pick out the final one through frontend 
+
+        return parties
 
 class PartyPost(generics.CreateAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin):
     serializer_class = PartySerializer

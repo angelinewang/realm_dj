@@ -12,9 +12,11 @@ urlpatterns = [
 
     # User Id passed into API to grab relevant parties
     path('parties/confirmed/<int:pk>', views.PartiesConfirmedList.as_view()),  # GET & POST
-    path('invite/<int:pk>/', views.CreateInvite.as_view()),
 
-# 1. Get the party 2. Get the invites 3. Get the guest profiles
+    path('createinvite/', views.CreateInvite.as_view()),
+    # Endpoint accepts 2 fields in POST body: #1 Party Id #2 Guest Id
+
+    # 1. Get the party 2. Get the invites 3. Get the guest profiles
     # Invites according to Party ID
 
     # #2 Guestlist Invites from Party_id

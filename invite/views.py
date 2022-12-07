@@ -5,7 +5,7 @@ from .serializers import InviteSerializer
 from rest_framework import mixins
 from rest_framework import permissions
 from django.core.exceptions import PermissionDenied
-from .serializers import SendInviteSerializer
+from .serializers import CreateInviteSerializer
 from rest_framework.response import Response
 from .serializers import UpdateInviteSerializer
 from .models import Party
@@ -46,33 +46,40 @@ class PartiesConfirmedList(generics.ListAPIView):
         pk = self.kwargs.get('pk')
         return get_list_or_404(Invite, status=1, guest_id=pk)
 
-class CreateInvite(generics.CreateAPIView, mixins.UpdateModelMixin, mixins.CreateModelMixin):
+class CreateInvite(generics.CreateAPIView):
+    # Only users able to reach the CreateInvite view are ALREADY determined to be Host
+    # Role of User validated on frontend
+    # If User is a Guest, they will be brought to Add Party Modal 
+
     queryset = Invite.objects.all()
-    serializer_class = SendInviteSerializer
-    # Checks that user is logged in 
+    serializer_class = CreateInviteSerializer
 
-    # Create a permissions file, and add IsHost
-    # authentication_classes = [JWTAuthentication]
+    # Flow of Invite Creation:
+    # 1. Frontend: Determine if User is Host 
+    # 2. Frontend: Get Party associated with User --> With authUserId in URL Parameters
+    # 3. Backend: Call CreateInvite API with Guest Id & Party Id as fields in body of the anonymous call
+    # Since Party automatically associated with Host Id, no need to pass Id of authenticated User when making POST Request
 
-    # 1. Is Host 2. Grab Party Associated
+    # CreateInviteView works, but occasionally begins data creation with existing IDs
+    # Continual retry of Invite Creation overcomes this issue
+    def post(self, request, *args, **kwargs): 
+        # 2 Variables needed for creating invite:
+        # #1 Party ID ---> Through body of request
+        # #2 Guest ID ---> Through URL parameter
 
-    def post(self, request, *args, **kwargs):
+        serializer = CreateInviteSerializer(data=request.data)
 
-        # Create invite where the party id is the party of the host
-        # And the guest_id is the id in the API URL
-
-        serializer = SendInviteSerializer(data=request.data)
-        print(request.user.role)
-        if request.user.role == 1 and serializer.is_valid():
+        # User Role validated as Host through frontend
+        if serializer.is_valid():
             # Passing authenticated user id as foreign key
-            serializer.save(party_id=Party.objects.get(host_id=request.user.id), guest_id=get_user_model().objects.get(id=object_id))
-            return Response({'message': 'Invite Sent'})
+            serializer.save()
+            return Response({'message': 'Invite Created'})
 
-            return Response(serializer.errors, status=422)
+        return Response(serializer.errors, status=422)
 
             # return Invite.objects.create(self, request, *args, **kwargs)
-        else:
-            raise PermissionDenied()
+        # else:
+        #     raise PermissionDenied()
     
     # PUT is used to replace all current properties
 

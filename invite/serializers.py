@@ -21,6 +21,7 @@ class PartySerializer(serializers.ModelSerializer):
         fields = ("id", "created_at", "host_id",
                   "flat", "first_entry", "vibe", )
 
+# UNSURE: Where InviteSerializer is being used at the moment 
 class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
     class Meta:
         model = Invite
@@ -34,17 +35,21 @@ class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
         invite = Invite.objects.create(**validated_data, party_id=party_id)
         return invite
 
-class SendInviteSerializer(serializers.ModelSerializer):
+class CreateInviteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invite
-        fields = ("party_id",)
+        fields = ("party_id", "guest_id")
+    # To use send invite POST request 
+    # 1. Get party belonging to host with PartyView
+    # 2. Use party retrieved in body of request as a field 
+    # 3. Use guest id as URL parameter to pass into CreateInviteView
     
-    def create(self, validated_data):
-        my_view = self.context['view']
-        object_id = my_view.kwargs.get('pk')
+    # def create(self, validated_data):
+    #     my_view = self.context['view']
+    #     object_id = my_view.kwargs.get('pk')
 
-        invite = Invite.objects.create(**validated_data, guest_id=object_id)
-        return invite 
+    #     invite = Invite.objects.create(**validated_data, guest_id=object_id)
+    #     return invite 
 
 class UpdateInviteSerializer(serializers.ModelSerializer):
     class Meta:
