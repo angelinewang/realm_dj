@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # User Id passed into API to grab relevant parties
-    path('parties/invited/<int:pk>', views.PartiesInvitedList.as_view()),  # GET & POST 
+    path('parties/invited/<int:pk>/', views.PartiesInvitedList.as_view()),  # GET & POST 
 
     # These 2 are used for both Invited cards and Confirmed cards
     path('parties/host/<int:pk>/', views.HostView.as_view()),  # GET & POST

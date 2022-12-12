@@ -21,3 +21,11 @@ Views:
 3. Backend: Call CreateInvite API with Guest Id & Party Id as fields in body of the anonymous call
 
 Since Party automatically associated with Host Id, no need to pass Id of authenticated User when making POST Request
+
+### Testing Data
+#### Testing Hosts
+IDs: 12, 13, 14, 15, 16
+Names: Host 1, Host 2, Host 3, Host 4, Host 5
+
+IDs for Parties: 37, 38, 39, 40, 41
+Flats: PASTPARTY1, PASTPARTY2, FUTUREPARTY1, FUTUREPARTY2, FUTUREPARTY3

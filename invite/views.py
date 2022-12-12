@@ -17,15 +17,86 @@ from django.views.generic import DetailView
 from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
 from django.http import Http404
 from rest_framework.decorators import api_view
+from datetime import datetime, timedelta
+import pytz
 
+utc = pytz.UTC
 # Create your views here.
 
 class PartiesInvitedList(generics.ListAPIView):
     serializer_class = InviteSerializer
+    # serializer_class = PartySerializer
 
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        return get_list_or_404(Invite, status=0, guest_id=pk)
+        
+        # Get all invites whose guest_id is the same as the authUser
+        # Filter the parties so that only the ones with last entry in the future are shown
+
+        # This should return all 5 parties Bob is invited to: 3 in the future and 2 in the past
+        # return get_list_or_404(Invite, status=0, guest_id=pk) WORKING 
+
+        invitedParties = get_list_or_404(Invite, status=0, guest_id=pk)
+
+        # 1. Add a few invites for Bob: 3 in future, 2 in past
+        # 2. Try API Endpoint on Postman again 
+
+        partiesIds = []
+
+        for v in invitedParties:
+            partiesIds.append(v.party_id_id)
+            print(partiesIds)
+
+        # Get the parties whose id is in invitedParties 
+
+        # return Party.objects.filter(id__in=partiesIds) 
+        # return Party.objects.filter(id__in=partiesIds)
+        
+        parties = Party.objects.filter(id__in=partiesIds)
+
+        # datetime.now() is "aware": It has reference to UTC time zone in the end
+        naiveNow = datetime.now()
+
+
+        # first_entry is "naive"
+
+        lastEntries = []
+
+        for v in parties:
+            print("FIRST ENTRY:")
+            print(v.first_entry)
+
+            last_entry = v.first_entry + timedelta(hours=12)
+
+            print("LAST ENTRY:")
+            print(last_entry)
+
+            awareNow = utc.localize(naiveNow)
+            print("NOW:")
+            print(awareNow)
+
+            # Changed "now" from "naive" to "aware"
+            if last_entry < awareNow:
+                print("Last Entry is in the PAST")
+                print("This Party's Last Entry has passed")
+                print(lastEntries)
+                    # If last entry has passed
+                    # Append this party into the list of returned parties
+            
+            elif last_entry > awareNow:
+                        # If last entry is is still in future: Do not change the user role and return the user data as is
+                print("Last Entry is the FUTURE")
+                lastEntries.append(v.id)
+                print(lastEntries)
+        
+        return lastEntries
+        
+        # 1. Find all the invites 
+        # 2. Create a list of the parties with ID and first entry 
+        # 3. Amend the list so that the first entry is changed into the last entry 
+        # 4. Delete irrelevant parties from list 
+        # 5. Use IDs the parties remaining to get the list of party invites for the User
+        # 6. Return this list has the list of invites 
 
 class HostView(generics.RetrieveAPIView):
     serializer_class = HostSerializer

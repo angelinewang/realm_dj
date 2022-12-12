@@ -89,7 +89,6 @@ class LoginView(generics.ListCreateAPIView):
 
         return Response({'token': token, 'message': f'Welcome back {user.username}!!'})
 
-
 class FirstEntryView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     # 1. Grab the last party associated to the user 
     # 2. Use the FirstEntrySerialiser to only send back the first entry of the party 
