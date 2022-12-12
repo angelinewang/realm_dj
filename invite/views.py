@@ -24,8 +24,8 @@ utc = pytz.UTC
 # Create your views here.
 
 class PartiesInvitedList(generics.ListAPIView):
-    serializer_class = InviteSerializer
-    # serializer_class = PartySerializer
+    # API uses the invites to find the parties and returns the party details rather than the details of the invites for the frontend
+    serializer_class = PartySerializer
 
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
@@ -91,14 +91,14 @@ class PartiesInvitedList(generics.ListAPIView):
                 lastEntries.append(v.id)
                 print(lastEntries)
         
-        futureInvites = []
+        futureParties = []
 
-        for v in invitedParties:
-            if v.party_id_id in lastEntries:
-                futureInvites.append(v)
-                
+        for v in parties:
+            if v.id in lastEntries:
+                futureParties.append(v)
+
         # Returns the list of invites belonging to the user filtered to only include invites with party ids that have been determined to be in the future
-        return futureInvites
+        return futureParties
         
         # 1. Find all the invites 
         # 2. Create a list of the parties with ID and first entry 
