@@ -121,12 +121,86 @@ class PartyView(generics.RetrieveAPIView):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Party, id=pk)
 
+# 1. Change PASTPARTY1 into confirmed status 
+# 2. Change FUTUREPARTY2 into confirmed status
+# 3. Change FUTUREPARTY3 into confirmed status
 class PartiesConfirmedList(generics.ListAPIView):
+    # 1. Grabs the invites here and sends them to the front end
+    # 2. Frontend will grab the Party profile from the invites through another API
     serializer_class = InviteSerializer
+    # serializer_class = PartySerializer
 
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        return get_list_or_404(Invite, status=1, guest_id=pk)
+
+        # Get all invites whose guest_id is the same as the authUser
+        # Filter the parties so that only the ones with last entry in the future are shown
+
+        # This should return all 5 parties Bob is invited to: 3 in the future and 2 in the past
+        # return get_list_or_404(Invite, status=0, guest_id=pk) WORKING
+
+        confirmedParties = get_list_or_404(Invite, status=1, guest_id_id=pk)
+
+        # 1. Add a few invites for Bob: 3 in future, 2 in past
+        # 2. Try API Endpoint on Postman again
+
+        partiesIds = []
+
+        for v in confirmedParties:
+            partiesIds.append(v.party_id_id)
+            print(partiesIds)
+
+        # Get the parties whose id is in invitedParties
+
+        # return Party.objects.filter(id__in=partiesIds)
+        # return Party.objects.filter(id__in=partiesIds)
+
+        parties = Party.objects.filter(id__in=partiesIds)
+
+        # datetime.now() is "aware": It has reference to UTC time zone in the end
+        naiveNow = datetime.now()
+
+        # first_entry is "naive"
+
+        # lastEntries returns a list of party ids for the Invites
+        # from the list of party ids, return all parties from "parties" that have a party_id_id within lastEntries
+        lastEntries = []
+
+        for v in parties:
+            print("FIRST ENTRY:")
+            print(v.first_entry)
+
+            last_entry = v.first_entry + timedelta(hours=12)
+
+            print("LAST ENTRY:")
+            print(last_entry)
+
+            awareNow = utc.localize(naiveNow)
+            print("NOW:")
+            print(awareNow)
+
+            # Changed "now" from "naive" to "aware"
+            if last_entry < awareNow:
+                print("Last Entry is in the PAST")
+                print("This Party's Last Entry has passed")
+                print(lastEntries)
+                # If last entry has passed
+                # Append this party into the list of returned parties
+
+            elif last_entry > awareNow:
+                # If last entry is is still in future: Do not change the user role and return the user data as is
+                print("Last Entry is the FUTURE")
+                lastEntries.append(v.id)
+                print(lastEntries)
+
+        futureConfirmed = []
+
+        for v in confirmedParties:
+            if v.party_id_id in lastEntries:
+                futureConfirmed.append(v)
+
+        # Returns the list of invites belonging to the user filtered to only include invites with party ids that have been determined to be in the future
+        return futureConfirmed
 
 class CreateInvite(generics.CreateAPIView):
     # Only users able to reach the CreateInvite view are ALREADY determined to be Host
