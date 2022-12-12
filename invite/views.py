@@ -60,6 +60,8 @@ class PartiesInvitedList(generics.ListAPIView):
 
         # first_entry is "naive"
 
+        # lastEntries returns a list of party ids for the Invites
+        # from the list of party ids, return all parties from "parties" that have a party_id_id within lastEntries
         lastEntries = []
 
         for v in parties:
@@ -89,7 +91,14 @@ class PartiesInvitedList(generics.ListAPIView):
                 lastEntries.append(v.id)
                 print(lastEntries)
         
-        return lastEntries
+        futureInvites = []
+
+        for v in invitedParties:
+            if v.party_id_id in lastEntries:
+                futureInvites.append(v)
+                
+        # Returns the list of invites belonging to the user filtered to only include invites with party ids that have been determined to be in the future
+        return futureInvites
         
         # 1. Find all the invites 
         # 2. Create a list of the parties with ID and first entry 

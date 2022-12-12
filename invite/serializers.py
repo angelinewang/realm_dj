@@ -28,12 +28,12 @@ class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
         fields = ("id", "created_at", "updated_at", "party_id_id", "guest_id_id", "status", "plus_ones")
     
     # Get the party_id by searching through all parties with first_entry no more than 12 hours after .now()
-    def create(self, validated_data):
-        party_data = validated_data.pop("party_id_id")
-        (party_id_id, _) = get_user_model().objects.get(**party_data)
+    # def create(self, validated_data):
+    #     party_data = validated_data.pop("party_id_id")
+    #     (party_id_id, _) = get_user_model().objects.get(**party_data)
 
-        invite = Invite.objects.create(**validated_data, party_id_id=party_id_id)
-        return invite
+    #     invite = Invite.objects.create(**validated_data, party_id_id=party_id_id)
+    #     return invite
 
 class CreateInviteSerializer(serializers.ModelSerializer):
     class Meta:
