@@ -35,6 +35,11 @@ class InviteSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
     #     invite = Invite.objects.create(**validated_data, party_id_id=party_id_id)
     #     return invite
 
+class InviteConfirmSerializer(serializers.ModelSerializer, mixins.CreateModelMixin):
+    class Meta:
+        model = Invite
+        fields = ("status",)
+
 class CreateInviteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invite

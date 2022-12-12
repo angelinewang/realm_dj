@@ -11,7 +11,7 @@ from .serializers import UpdateInviteSerializer
 from .models import Party
 from user.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
-from .serializers import HostSerializer, GuestSerializer
+from .serializers import HostSerializer, GuestSerializer, InviteConfirmSerializer
 from .serializers import PartySerializer
 from django.views.generic import DetailView
 from django.shortcuts import HttpResponse, get_object_or_404, get_list_or_404
@@ -243,16 +243,27 @@ class CreateInvite(generics.CreateAPIView):
 
     # The following endpoint is used ONLY to change the "status" property of an Invite object
 
-class ConfirmInvite(generics.UpdateAPIView):
-    # authentication_classes = [JWTAuthentication]
-    def patch(request, *args, **kwargs):
-        invite = Invite.objects.get(id=request.data.id)
-        serializer = UpdateInviteSerializer(invite, data=request.data)
 
-        if serializer.is_valid:
-            serializer.save(status=1)
-            return Response({'message': 'Guest Confirmed'})
-        return Response(serializer.errors, status=422)
+class ConfirmAttend(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+
+    serializer_class = InviteConfirmSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        Invite.objects.filter(id=pk).update(status=1)
+
+        return Invite.objects.filter(id=pk)
+        
+# class ConfirmInvite(generics.UpdateAPIView):
+
+#     def patch(request, *args, **kwargs):
+#         invite = Invite.objects.get(id=request.data.id)
+#         serializer = InviteConfirmSerializer(invite, data=request.data)
+
+#         if serializer.is_valid:
+#             serializer.save(status=1)
+#             return Response({'message': 'Guest Confirmed'})
+#         return Response(serializer.errors, status=422)
 
 class CancelInvite(generics.UpdateAPIView):
     # authentication_classes = [JWTAuthentication]
@@ -276,6 +287,8 @@ class CheckinInvite(generics.UpdateAPIView):
             serializer.save(status=3)
             return Response({'message': 'Guest Confirmed'})
         return Response(serializer.errors, status=422)
+
+
 
 
 # Invites page

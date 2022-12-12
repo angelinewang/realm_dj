@@ -29,3 +29,7 @@ Names: Host 1, Host 2, Host 3, Host 4, Host 5
 
 IDs for Parties: 37, 38, 39, 40, 41
 Flats: PASTPARTY1, PASTPARTY2, FUTUREPARTY1, FUTUREPARTY2, FUTUREPARTY3
+
+### Parties Screens 
+Validation that parties shown on both Invited and Confirmed screens
+= Only include parties whose last entry (12 hours after first entry) is in the future
