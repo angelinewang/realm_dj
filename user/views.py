@@ -99,11 +99,16 @@ class LoginView(generics.ListCreateAPIView):
 
 class UpdatePhoto(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     serializer_class = UpdatePhotoSerializer
-    def get_queryset(self, request, *args, **kwargs):
+    parser_classes = (MultiPartParser, FormParser)
+    queryset = get_user_model().objects.all()
+
+    def patch(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         get_user_model().objects.filter(id=pk).update(profile_picture=request.data.get('profile_picture'))
-
-        return get_user_model().objects.filter(id=pk)
+            #     if serializer.is_valid():
+            # serializer.save()
+            # return Response({'message': 'Registration Successful'})
+        return Response("Profile Photo Updated!")
 
 class FirstEntryView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     # 1. Grab the last party associated to the user 
