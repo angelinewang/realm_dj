@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '27f9-193-61-207-186.eu.ngrok.io',
+    '4c33-193-61-207-186.eu.ngrok.io',
     'kubernetes.docker.internal', 'localhost:8000', "http://localhost:3000",
                  "exp://10.40.195.102:19000",
                  "http://localhost:19002",
