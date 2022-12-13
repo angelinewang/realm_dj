@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from .serializers import UserLoginSerializer
-from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer, FirstEntrySerializer
+from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer, FirstEntrySerializer, UpdatePhotoSerializer
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
@@ -96,6 +96,14 @@ class LoginView(generics.ListCreateAPIView):
         )
 
         return Response({'token': token, 'message': f'Welcome back {user.username}!!'})
+
+class UpdatePhoto(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+    serializer_class = UpdatePhotoSerializer
+    def get_queryset(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        get_user_model().objects.filter(id=pk).update(profile_picture=request.data.get('profile_picture'))
+
+        return get_user_model().objects.filter(id=pk)
 
 class FirstEntryView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     # 1. Grab the last party associated to the user 

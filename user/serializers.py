@@ -80,6 +80,11 @@ class UserRoleSerializer(serializers.ModelSerializer):
         fields = ('role',)
 
 
+class UpdatePhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('profile_photo',)
+
 # class Base64ImageField(serializers.ImageField):
 #     """
 #     A Django REST framework field for handling image-uploads through raw post data.

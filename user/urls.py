@@ -14,6 +14,8 @@ urlpatterns = [
     path('firstentry/<int:pk>/', views.FirstEntryView.as_view()),
 
 
+    path('updatephoto/<int:pk>/', views.UpdatePhoto.as_view()),
+
     path('changerole/<int:pk>/', views.RoleChangeView.as_view()),
     path('guests/browse/<int:pk>/guestmode/', views.GuestsBrowseGuestMode.as_view()), # GET only, when user state is guest
     # GET only, when user state is guest
