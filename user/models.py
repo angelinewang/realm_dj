@@ -1,11 +1,20 @@
 from django.db import models
+# from .validators import validate_file_extension
 from enum import Enum
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
-
+from django.core.validators import FileExtensionValidator
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+import os
+from django.core.files import File
+import urllib
+
+from django.core.files.storage import FileSystemStorage
+
+fs = FileSystemStorage(location='/profile_pictures')
+
 # from rest_framework.authtoken.models import Token
 
 class CustomUser(AbstractUser):
@@ -51,11 +60,25 @@ class CustomUser(AbstractUser):
     gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none))
     birthdate = models.DateTimeField(null=True)
     department = models.IntegerField(null=True, choices=[x.value for x in DEPARTMENT])
-    profile_picture = models.ImageField(null=True, upload_to='profile_pictures/')
+    
+    # ImageField is a File Object
+    # validators = [validate_file_extension]
+    # profile_picture = models.ImageField(
+    #     null=True, storage=fs)
+    profile_picture = models.CharField(null=True, blank=True, max_length=1000)
+    # url = models.CharField(max_length=255, unique=True)
     role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest))
 
     def __str__(self):
         return f"{self.id}: {self.name}"
+
+    # def cache(self):
+    #     # Store image locally if we have a URL 
+
+    #     if self.url and not self.profile_picture:
+    #         result = urllib.urlretrieve(self.url)
+    #         self.profile_picture.save(os.path.basename(self.url), File(open(result[0], 'rb')))
+    #         self.save()
 
 
 # @receiver(post_save, sender=settings.AUTH_USER_MODEL)

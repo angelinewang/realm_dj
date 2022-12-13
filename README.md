@@ -33,3 +33,12 @@ Flats: PASTPARTY1, PASTPARTY2, FUTUREPARTY1, FUTUREPARTY2, FUTUREPARTY3
 ### Parties Screens 
 Validation that parties shown on both Invited and Confirmed screens
 = Only include parties whose last entry (12 hours after first entry) is in the future
+
+### SignUp Form 
+Unable to use FileUploadParser because not using a native client
+--> Only able to use MultiPartParser
+[Django REST Framework Parsers](https://www.django-rest-framework.org/api-guide/parsers/)
+
+### Photo Upload 
+1. Base64 Encoded in frontend 
+2. Saved as Base64 in backend

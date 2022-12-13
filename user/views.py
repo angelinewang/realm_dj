@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import UserSerializer
@@ -17,6 +18,9 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from party.models import Party 
 from invite.models import Invite
 from invite.serializers import InviteSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.core.files import File
+import urllib 
 
 from datetime import datetime, timedelta
 import pytz
@@ -32,6 +36,8 @@ class RegisterView(generics.CreateAPIView):
     # Signup Page
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    parser_classes = (MultiPartParser, FormParser)
+ 
     # permission_classes = [permissions.AllowAny]
     def post(self, request):
         serializer = UserSignUpSerializer(data=request.data)

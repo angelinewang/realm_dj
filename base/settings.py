@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -196,3 +196,7 @@ CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 
 SESSION_COOKIE_SECURE = False
+
+# Configuration for Image Uploads
+MEDIA_URL = '/profile_pictures/' # URL used to access file over HTTP
+MEDIA_ROOT = os.path.join(BASE_DIR, 'profiles_pictures')
