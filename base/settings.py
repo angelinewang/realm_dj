@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '4c33-193-61-207-186.eu.ngrok.io',
+    'c4a0-193-61-207-186.eu.ngrok.io',
     'kubernetes.docker.internal', 'localhost:8000', "http://localhost:3000",
                  "exp://10.40.195.102:19000",
                  "http://localhost:19002",
@@ -121,11 +121,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'realm_django',
         'USER': 'postgres',
-        'PASSWORD': 'kittyKat7765',
+        'PASSWORD': 'blueLilacs8830',
         'HOST': 'localhost',
         'PORT': '5432',
     }
+    # Use django-environ to parse the connection string
+    # "default": env.db()
 }
+# If the flag as been set, configure to use proxy
+# if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
+#     DATABASES["default"]["HOST"] = "127.0.0.1"
+#     DATABASES["default"]["PORT"] = 5432
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [

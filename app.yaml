@@ -1,0 +1,11 @@
+runtime: custom
+env: flex
+entrypoint: python main.py
+
+beta_settings:
+    cloud_sql_instances: realm-rn-dj:europe-west1:realm-django
+
+service_account: realm-rn-dj@appspot.gserviceaccount.com
+
+runtime_config:
+  python_version: 3.10
