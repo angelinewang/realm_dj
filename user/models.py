@@ -71,6 +71,9 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.id}: {self.name}"
+    
+    class Meta:
+        db_table = "user"
 
     # def cache(self):
     #     # Store image locally if we have a URL 

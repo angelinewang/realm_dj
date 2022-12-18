@@ -40,7 +40,7 @@ Unable to use FileUploadParser because not using a native client
 [Django REST Framework Parsers](https://www.django-rest-framework.org/api-guide/parsers/)
 
 ### Photo Upload 
-1. Base64 Encoded in frontend 
+1. Base64 Encoded in frontend
 2. Saved as Base64 in backend
 
 ### Google Cloud Configuration Terminal Commands 

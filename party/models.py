@@ -27,3 +27,6 @@ class Party(models.Model):
 
     def __str__(self):
         return f"{self.flat}: {self.first_entry}"
+    
+    class Meta:
+        db_table = "party"

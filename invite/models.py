@@ -26,3 +26,6 @@ class Invite(models.Model):
 
     def __str__(self):
         return f"{self.guest_id} invited to {self.party_id}"
+
+    class Meta:
+        db_table = "invite"
