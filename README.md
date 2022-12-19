@@ -193,3 +193,6 @@ gingerCakes9292
 #### Member
 169578510116@cloudbuild.gserviceaccount.com
 --> Role: Secret Manager Secret Accessor
+
+#### realm-dj Service URL 
+https://realm-dj-34ezrkuhla-ew.a.run.app
