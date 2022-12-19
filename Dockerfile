@@ -7,6 +7,7 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
+CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 
 # # Use the official lightweight Python image.
 # # https://hub.docker.com/_/python
