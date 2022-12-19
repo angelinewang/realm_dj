@@ -134,3 +134,34 @@ Packages are managed with `poetry`
 --> using pg_dump
 2. Import data into Cloud SQL 
 --> using pg_restore
+
+### Database Secrets
+#### Storage Location
+Under "django-settings"
+--> Variables set in this secret:
+1. DATABASE_URL 
+2. GS_BUCKET_NAME 
+3. SECRET_KEY
+[Here is the link to secrets](https://console.cloud.google.com/security/secret-manager/secret/django_settings/versions?authuser=0&project=realm-rn-dj)
+
+#### View Database Secrets 
+1. Go to Secret Manager
+2. Find "django-settings"
+3. Click on 3 dots under "Actions"
+4. Click on "Secret Value"
+
+#### Webpage w/ Instructions to Create & Delete env file
+[Running Django on the App Engine flexible environment - Google Cloud](https://cloud.google.com/python/django/flexible-environment#linuxmacos_2)
+
+
+#### Access to django-settings 
+The secret is accessible by: realm-rn-dj@appspot.gserviceaccount.com through its Role: Secret Manager Secret Accessor
+
+
+### Mon 19th Dec 2022
+1. Updated the database password in Secret Manager "django-settings" and in .env file in realm_dj
+
+
+### Backend Deployment Tech Stack 
+Django on App Engine Flexible Environment
+Instructions for deployment can be found [here](https://cloud.google.com/python/django/flexible-environment#linuxmacos_2)
