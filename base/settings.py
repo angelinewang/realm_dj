@@ -20,12 +20,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l'
+# SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l'
+SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    'realm-dj-34ezrkuhla-ew.a.run.app',
+    'localhost:8080',
+    'localhost:4000',
+    'localhost:5000',
     'effb-82-0-186-223.eu.ngrok.io',
     'kubernetes.docker.internal', 'localhost:8000', "http://localhost:3000",
                  "exp://10.40.195.102:19000",
@@ -189,6 +194,7 @@ AUTH_USER_MODEL = 'user.CustomUser'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 CORS_ALLOWED_ORIGINS = [
+    "https://realm-dj-34ezrkuhla-ew.a.run.app",
     "http://localhost:8000",
     "exp://10.40.195.102:19000",
     "http://localhost:19002",
