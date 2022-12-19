@@ -163,5 +163,33 @@ The secret is accessible by: realm-rn-dj@appspot.gserviceaccount.com through its
 
 
 ### Backend Deployment Tech Stack 
+Previously Decided to use:
 Django on App Engine Flexible Environment
 Instructions for deployment can be found [here](https://cloud.google.com/python/django/flexible-environment#linuxmacos_2)
+
+Decided is better to use:
+Cloud Run 
+Arguments why it is better [Cloud Run vs App Engine: a head-to-head comparison using facts and science - Paul Craig](https://dev.to/pcraig3/cloud-run-vs-app-engine-a-head-to-head-comparison-using-facts-and-science-1225)
+--> Cloud Run: 99% Cheaper because only charges you when there are API requests, and boots up the container then
+--> Cloud Run = Containerized Serverless
+--> Cloud Run = Charges you for the time spent running your app as a container, and the container only runs when requests come in
+--> App Engine: A bit faster, but charged for the entire time it is up, so significantly more expensive
+
+### Detailed Guide to Docker
+[Docker Guide](https://robertcooper.me/post/docker-guide)
+
+### Deploying Django on Cloud Run 
+[Running Django on the Cloud Run environment - Google Cloud](https://cloud.google.com/python/django/run)
+
+### django_settings 
+#### Project Number: 169578510116
+projects/169578510116/secrets/django_settings
+--> Member: 169578510116@cloudbuild.gserviceaccount.com
+--> Role: Secret Manager Secret Accessor
+
+### superuser_password 
+gingerCakes9292
+
+#### Member
+169578510116@cloudbuild.gserviceaccount.com
+--> Role: Secret Manager Secret Accessor
