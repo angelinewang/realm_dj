@@ -196,3 +196,7 @@ gingerCakes9292
 
 #### realm-dj Service URL 
 https://realm-dj-34ezrkuhla-ew.a.run.app
+
+### Solution to custom container not connecting to port 8080 when deploying on Cloud Build 
+Add this line to Dockerfile: 
+`CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app`
