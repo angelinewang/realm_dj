@@ -210,3 +210,16 @@ cloud sql auth proxy must be running on port 8000
 AND python manage.py runserver must be running on port 8080
 --> Both need to be running 
 --> And then use API on port 8080 (port python manage.py runserver is on)
+
+Dockerfile REPLACES cloudbuild.yaml 
+These are both configuration files
+
+Examples of Configuration Files
+1. Dockerfile
+2. yaml
+3. json 
+
+Any changes to the Dockerfile will result in a new IMAGE being created
+
+### Changed Continuous Deployment 
+To be now from production branch rather than main
