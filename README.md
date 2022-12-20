@@ -248,3 +248,4 @@ For private IP paths, your application connects directly to your instance throug
 https://parth-vijay.medium.com/configure-postgresql-database-of-django-app-in-cloud-sql-f56ceec0fb66
 
 https://cloud.google.com/sql/docs/postgres/connect-instance-cloud-run#console_5
+https://dragonprogrammer.com/connect-django-database-cloud-sql/

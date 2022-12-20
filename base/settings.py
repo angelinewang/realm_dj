@@ -133,7 +133,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASS', 'blueLilacs8830'),
         'NAME': os.environ.get('DB_NAME', 'realm_django'),
         # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
-        'PORT': 5432,
+        'PORT': '5432',
     }
     # Use django-environ to parse the connection string
     # "default": env.db()
