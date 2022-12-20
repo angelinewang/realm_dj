@@ -133,7 +133,8 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        # 
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': '35.195.57.236',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
