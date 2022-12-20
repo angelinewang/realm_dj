@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-if __name__ == "__main__":
+if __name__ == "__base__":
     app.run(port=int(os.environ.get("DB_PORT", "5432")),
             host="35.195.57.236", debug=False)
 
