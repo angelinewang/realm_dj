@@ -4,9 +4,9 @@ COPY . /app
 COPY pyproject.toml /app 
 WORKDIR /app
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
-RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --only main
+# RUN pip3 install poetry
+# RUN poetry config virtualenvs.create false
+# RUN poetry install --only main
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
 #                "--uid", "uwsgi", \
 #                "--plugins", "python3", \
