@@ -134,12 +134,13 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         # 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'HOST': '35.195.57.236',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
         'USER': 'postgres',
         'PASSWORD': 'blueLilacs8830',
+        'INSTANCE': 'realm-django',
         'NAME': 'realm_django',
         # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '5432',
