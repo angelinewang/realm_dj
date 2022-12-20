@@ -205,3 +205,8 @@ Add this line to Dockerfile:
 ### Stop what is currently being run on a PORT
 Terminal Command: `npx kill-port 8080`
 
+### Running App Locally 
+cloud sql auth proxy must be running on port 8000
+AND python manage.py runserver must be running on port 8080
+--> Both need to be running 
+--> And then use API on port 8080 (port python manage.py runserver is on)
