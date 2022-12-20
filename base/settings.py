@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'jsonify',
     'flask',
     'gunicorn',
-    'django-storages',
+    'storages',
 
     'corsheaders',
 
@@ -232,5 +232,5 @@ CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SECURE = False
 
 # Configuration for Image Uploads
-MEDIA_URL = '/profile_pictures/' # URL used to access file over HTTP
-MEDIA_ROOT = os.path.join(BASE_DIR, 'profiles_pictures')
+# MEDIA_URL = '/profile_pictures/' # URL used to access file over HTTP
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'profiles_pictures')
