@@ -27,6 +27,7 @@ SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    '35.195.57.236', # Cloud SQL Instance Public IP Address
     'realm-dj-34ezrkuhla-ew.a.run.app',
     '10.6.0.4',
     'localhost:8080',
@@ -125,12 +126,14 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'realm_django'),
+        'HOST': '35.195.57.236',
+        # The HOST is the Cloud SQL Public IP 
+        # PORT not needed in production code for DB, PORT only needed for container 
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASS', 'blueLilacs8830'),
-        'HOST': 'localhost',
-        # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
-        'PORT': '8000',
+        'NAME': os.environ.get('DB_NAME', 'realm_django'),
+        # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
+        # 'PORT': '8000',
     }
     # Use django-environ to parse the connection string
     # "default": env.db()
