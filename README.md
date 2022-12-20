@@ -239,3 +239,8 @@ Solution: Must connect Cloud SQL Instance through PRIVATE IP
 
 For private IP paths, your application connects directly to your instance through Serverless VPC Access. This method uses a TCP socket to connect directly to the Cloud SQL instance without using the Cloud SQL Auth proxy.
 --> This means that a Cloud SQL Auth proxy is not needed in production
+
+### Actually I can use Public IP 
+= It is only mySQL that needs PRIVATE IP
+[Postgres Connect Instance Cloud Run](https://cloud.google.com/sql/docs/postgres/connect-instance-cloud-run)
+--> Must start over and use Public IP instead, using the VPC Connector forces me to use 2 instances, which will cost much more
