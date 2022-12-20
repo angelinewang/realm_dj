@@ -235,7 +235,7 @@ To be now from production branch rather than main
 ### Issue connecting to Cloud SQL instance through Cloud Run
 Solution: Must connect Cloud SQL Instance through PRIVATE IP
 --> Does not support connection through PUBLIC IP
-[](https://cloud.google.com/sql/docs/sqlserver/connect-instance-cloud-run)
+[Quickstart: Connect from Cloud Run - Cloud SQL](https://cloud.google.com/sql/docs/sqlserver/connect-instance-cloud-run)
 
 For private IP paths, your application connects directly to your instance through Serverless VPC Access. This method uses a TCP socket to connect directly to the Cloud SQL instance without using the Cloud SQL Auth proxy.
 --> This means that a Cloud SQL Auth proxy is not needed in production
