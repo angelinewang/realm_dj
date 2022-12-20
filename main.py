@@ -3,7 +3,8 @@ import os
 
 app = Flask(__name__)
 
-app.run(port=int(os.environ.get("DB_PORT", "8000")), host=os.environ.get("DB_HOST", "localhost"), debug=False)
+if __name__ == "__base__":
+    app.run()
 
 # @app.route("/")
 # def hello_world():
@@ -13,3 +14,5 @@ app.run(port=int(os.environ.get("DB_PORT", "8000")), host=os.environ.get("DB_HOS
 
 # if __name__ == "__main__":
 #     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    # app.run(port=int(os.environ.get("DB_PORT", "8000")),
+    #         host=os.environ.get("DB_HOST", "localhost"), debug=False)
