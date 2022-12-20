@@ -244,3 +244,7 @@ For private IP paths, your application connects directly to your instance throug
 = It is only mySQL that needs PRIVATE IP
 [Postgres Connect Instance Cloud Run](https://cloud.google.com/sql/docs/postgres/connect-instance-cloud-run)
 --> Must start over and use Public IP instead, using the VPC Connector forces me to use 2 instances, which will cost much more
+
+https://parth-vijay.medium.com/configure-postgresql-database-of-django-app-in-cloud-sql-f56ceec0fb66
+
+https://cloud.google.com/sql/docs/postgres/connect-instance-cloud-run#console_5
