@@ -6,15 +6,15 @@ WORKDIR /app
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
-RUN poetry install --only base
+RUN poetry install --only main
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
 #                "--uid", "uwsgi", \
 #                "--plugins", "python3", \
 #                "--protocol", "uwsgi", \
 #                "--wsgi", "main:application" ]
 # CMD [ "python", "./manage.py", "runserver", "0.0.0.0:5000", "--settings=django_settings" ]
-CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 base:app
-
+# CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 base:app
+CMD gunicorn -b :$PORT main:app
 # # Use the official lightweight Python image.
 # # https://hub.docker.com/_/python
 # FROM python:3.10-slim

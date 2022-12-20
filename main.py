@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-if __name__ == "__base__":
+if __name__ == "__main__":
     app.run()
 
 # @app.route("/")
