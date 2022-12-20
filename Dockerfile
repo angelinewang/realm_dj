@@ -16,6 +16,7 @@ RUN poetry install --only main
 # CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 base:app
 CMD gunicorn -b :8080 base.wsgi:application
 # # SERVICE URL/admin WORKING
+# But when attempt to log in, it does not work
 # # Use the official lightweight Python image.
 # # https://hub.docker.com/_/python
 # FROM python:3.10-slim

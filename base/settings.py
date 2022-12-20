@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
     'jwt',
-    
+
     'jsonify',
     'flask',
     'gunicorn',
@@ -137,9 +137,9 @@ DATABASES = {
         'HOST': '35.195.57.236',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASS', 'blueLilacs8830'),
-        'NAME': os.environ.get('DB_NAME', 'realm_django'),
+        'USER': 'postgres',
+        'PASSWORD': 'blueLilacs8830',
+        'NAME': 'realm_django',
         # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '5432',
     }
