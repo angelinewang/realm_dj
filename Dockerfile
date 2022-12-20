@@ -7,7 +7,7 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
-CMD python manage.py runserver 8080
+CMD python manage.py runserver 5000
 # CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 main:app
 
 # # Use the official lightweight Python image.
