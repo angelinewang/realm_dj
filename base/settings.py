@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
     'jwt',
+    
     'jsonify',
     'flask',
     'gunicorn',
