@@ -20,7 +20,8 @@ def getconn():
 app = Flask(__name__)
 
 # configure Flask-SQLAlchemy to use Python Connector
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+pg8000://postgres:blueLilacs8830@35.195.57.236:5432/realm_django"
+# postgres: blueLilacs8830@35.195.57.236: 5432/realm_django
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+pg8000://"
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     "creator": getconn
 }
