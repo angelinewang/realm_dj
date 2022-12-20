@@ -29,7 +29,9 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '35.195.57.236', # Cloud SQL Instance Public IP Address
     'realm-dj-34ezrkuhla-ew.a.run.app',
+    'https://realm-dj-34ezrkuhla-ew.a.run.app',
     '10.6.0.4',
+    '35.195.57.236:5432',
     'localhost:8080',
     'localhost:4000',
     'localhost:5000',
@@ -85,6 +87,7 @@ ROOT_URLCONF = 'base.urls'
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
+    'https://realm-dj-34ezrkuhla-ew.a.run.app',
     "exp://10.40.195.102:19000",
     'http://localhost:19002'
     'http://localhost:19000',
@@ -97,6 +100,7 @@ CORS_ORIGIN_WHITELIST = [
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    'https://realm-dj-34ezrkuhla-ew.a.run.app',
     "exp://10.40.195.102:19000",
     "http://localhost:19002",
     "http://localhost:19000", 
