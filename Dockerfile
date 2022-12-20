@@ -3,10 +3,14 @@ RUN mkdir /app
 COPY . /app
 COPY pyproject.toml /app 
 WORKDIR /app
-ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+# ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+# ENV PORT=8888 
+# ENV APP_NAME=""
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
+CMD python manage.py runserver 8080
+# ENTRYPOINT ["poetry", "run"]
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
 #                "--uid", "uwsgi", \
 #                "--plugins", "python3", \
@@ -14,7 +18,7 @@ RUN poetry install --only main
 #                "--wsgi", "main:application" ]
 # CMD [ "python", "./manage.py", "runserver", "0.0.0.0:5000", "--settings=django_settings" ]
 # CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 base:app
-CMD gunicorn -b :8080 main:app
+# CMD gunicorn -b :8080 main:app
 # # Use the official lightweight Python image.
 # # https://hub.docker.com/_/python
 # FROM python:3.10-slim
@@ -36,3 +40,6 @@ CMD gunicorn -b :8080 main:app
 # # to be equal to the cores available.
 # # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 # CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
+
+# 1. First make app work with python runserver ]
+# 2. Then make app work with Flask and Gunicorn 

@@ -27,6 +27,8 @@ SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'localhost',
+    '/cloudsql/realm-rn-dj:europe-west1:realm-django',
     'realm-dj-34ezrkuhla-ew.a.run.app',
     'localhost:8080',
     'localhost:4000',
