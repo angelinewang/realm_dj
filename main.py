@@ -4,8 +4,8 @@ import os
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    app.run(port=int(os.environ.get("DB_PORT", "8000")),
-            host=os.environ.get("DB_HOST", "localhost"), debug=False)
+    app.run(port=int(os.environ.get("DB_PORT", "5432")),
+            host="35.195.57.236", debug=False)
 
 # @app.route("/")
 # def hello_world():
