@@ -252,3 +252,6 @@ https://dragonprogrammer.com/connect-django-database-cloud-sql/
 
 #### Static File Storage with Google Cloud Storage
 https://django-storages.readthedocs.io/en/latest/backends/gcloud.html
+
+#### When connecting through python manage.py runserver 8080
+= SQL Instance connects and through angeline@realmpartyapp.com
