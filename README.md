@@ -249,3 +249,6 @@ https://parth-vijay.medium.com/configure-postgresql-database-of-django-app-in-cl
 
 https://cloud.google.com/sql/docs/postgres/connect-instance-cloud-run#console_5
 https://dragonprogrammer.com/connect-django-database-cloud-sql/
+
+#### Static File Storage with Google Cloud Storage
+https://django-storages.readthedocs.io/en/latest/backends/gcloud.html
