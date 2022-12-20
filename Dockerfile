@@ -15,7 +15,7 @@ RUN poetry install --only main
 #                "--wsgi", "main:application" ]
 # CMD [ "python", "./manage.py", "runserver", "0.0.0.0:5000", "--settings=django_settings" ]
 # CMD exec gunicorn --bind :3307 --workers 1 --threads 8 --timeout 0 base:app
-CMD gunicorn -b :8080 base.wsgi:application
+CMD gunicorn -b :8080 base.wsgi:application --timeout 0
 # CMD ["gunicorn", "--bind", ":8080", "--workers", "3", "base.wsgi:application"]
 # # SERVICE URL/admin WORKING
 # But when attempt to log in, it does not work
