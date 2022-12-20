@@ -224,4 +224,18 @@ Any changes to the Dockerfile will result in a new IMAGE being created
 ### Changed Continuous Deployment 
 To be now from production branch rather than main
 
----
+### Reverting Commits
+--> Forcing a non-fastforward push to remote repo
+--> Reverting and undoing commits 
+(Revert a Commit)[https://gist.github.com/gunjanpatel/18f9e4d1eb609597c50c2118e416e6a6]
+--> Forcefully reverting a commit will discard the deployment attempt from Cloud Run as well
+1. git reset --hard <commit number>
+2. git push origin -f
+
+### Issue connecting to Cloud SQL instance through Cloud Run
+Solution: Must connect Cloud SQL Instance through PRIVATE IP
+--> Does not support connection through PUBLIC IP
+[](https://cloud.google.com/sql/docs/sqlserver/connect-instance-cloud-run)
+
+For private IP paths, your application connects directly to your instance through Serverless VPC Access. This method uses a TCP socket to connect directly to the Cloud SQL instance without using the Cloud SQL Auth proxy.
+--> This means that a Cloud SQL Auth proxy is not needed in production
