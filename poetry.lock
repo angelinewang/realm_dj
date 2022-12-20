@@ -907,6 +907,14 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "sudo"
+version = "1.0.0"
+description = "Modular Python to execute any subprocess commands as another user(not necessarily superuser/root)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "tldextract"
 version = "3.4.0"
 description = "Accurately separates a URL's subdomain, domain, and public suffix, using the Public Suffix List (PSL). By default, this includes the public ICANN TLDs and their exceptions. You can optionally support the Public Suffix List's private domains as well."
@@ -1038,7 +1046,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b16ccd2773535712b212fc7042f66d2ba8a0c122b85240f3a30acf13fcbb7201"
+content-hash = "ef924ac10a04233ae83fddd9ffd16f46c155bf4fc3d8bb90ab6f0876817fe8b6"
 
 [metadata.files]
 aiohttp = [
@@ -2091,6 +2099,9 @@ sqlalchemy = [
 sqlparse = [
     {file = "sqlparse-0.4.3-py3-none-any.whl", hash = "sha256:0323c0ec29cd52bceabc1b4d9d579e311f3e4961b98d174201d5622a23b85e34"},
     {file = "sqlparse-0.4.3.tar.gz", hash = "sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268"},
+]
+sudo = [
+    {file = "sudo-1.0.0-py3-none-any.whl", hash = "sha256:65ace059d4173d2d7ffb0f0697ee64faeaef833ae2a1328b3124a39aea00a19c"},
 ]
 tldextract = [
     {file = "tldextract-3.4.0-py3-none-any.whl", hash = "sha256:47aa4d8f1a4da79a44529c9a2ddc518663b25d371b805194ec5ce2a5f615ccd2"},

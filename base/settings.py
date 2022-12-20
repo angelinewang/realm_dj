@@ -27,6 +27,7 @@ SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'cloudsql-proxy',
     '35.195.57.236', # Cloud SQL Instance Public IP Address
     'realm-dj-34ezrkuhla-ew.a.run.app',
     'https://realm-dj-34ezrkuhla-ew.a.run.app',
@@ -136,7 +137,7 @@ DATABASES = {
     'default': {
         # 
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '35.195.57.236',
+        'HOST': 'cloudsql-proxy',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
         'USER': 'postgres',

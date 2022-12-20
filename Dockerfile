@@ -7,7 +7,7 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
-RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:8000
+# RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:8000
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
 #                "--uid", "uwsgi", \
 #                "--plugins", "python3", \
@@ -22,6 +22,7 @@ CMD gunicorn -b :8080 base.wsgi:application --timeout 0
 # # Use the official lightweight Python image.
 # # https://hub.docker.com/_/python
 # FROM python:3.10-slim
+
 
 # # Allow statements and log messages to immediately appear in the Knative logs
 # ENV PYTHONUNBUFFERED True
@@ -40,3 +41,4 @@ CMD gunicorn -b :8080 base.wsgi:application --timeout 0
 # # to be equal to the cores available.
 # # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 # CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
+
