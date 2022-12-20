@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 if __name__ == "__main__":
     app.run(port=int(os.environ.get("DB_PORT", "8000")),
-            host=os.environ.get("DB_HOST", "localhost"), debug=False)
+            host=os.environ.get("localhost"), debug=False)
 
 
 # @app.route("/")
