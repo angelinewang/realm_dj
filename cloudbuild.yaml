@@ -2,12 +2,12 @@ steps:
       docker pull gcr.io/cloudsql-docker/gce-proxy:1.33.1
   - id: "docker-build"
     name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2@sha256:$COMMIT_SHA"]
+    args: ["build", "-t", "eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2:$COMMIT_SHA"]
     # , "gcr.io/cloudsql-docker/gce-proxy:1.33.1"
 
   - id: "docker-push"
     name: "gcr.io/cloud-builders/docker"
-    args: ["push", "eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2@sha256:$COMMIT_SHA"]
+    args: ["push", "eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2:$COMMIT_SHA"]
 
   - id: "docker-layer"
     name: "eu.gcr.io/cloud-builders/docker"
@@ -15,10 +15,10 @@ steps:
     args:
       - '-c'
       - |
-        echo "FROM eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2@sha256:$COMMIT_SHA
+        echo "FROM eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2:$COMMIT_SHA
         COPY --from=gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
 
-        docker build -f Dockerfile-proxy -t eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2@sha256:$COMMIT_SHA-proxy .
+        docker build -f Dockerfile-proxy -t eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2:$COMMIT_SHA-proxy .
 
   # # For TCP connections
   # - id: "migrate-tcp"

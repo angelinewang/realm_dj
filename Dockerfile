@@ -10,7 +10,19 @@ RUN poetry install --only main
 # RUN ./cloud_sql_proxy.exe -instances=realm-rn-dj:europe-west1:realm-django=tcp:8000
 # CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # CMD gunicorn -b :8080 base.wsgi:application --timeout 0
-CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
+# FROM ubuntu                                                                                                                                 
+
+# RUN apt-get update && apt-get -y install wget \
+#     && wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 \
+#     && mv cloud_sql_proxy.linux.amd64 cloud_sql_proxy \
+#     && chmod +x cloud_sql_proxy \
+#     && mkdir /cloudsql;
+
+# # Expects cred-file.json to be in working directory.
+# # This isn't good, but I haven't had time to improve yet.
+# COPY . /cloudsql
+CMD ["./cloud_sql_proxy", "-instances=realm-rn-dj:europe-west1:realm_django=tcp:35.195.57.236:5432"]
+# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # CMD gunicorn -b :8080 main:app
 # RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
 # RUN chmod +x cloud_sql_proxy
