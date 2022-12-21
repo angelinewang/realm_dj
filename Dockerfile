@@ -10,7 +10,7 @@ RUN poetry install --only main
 # RUN ./cloud_sql_proxy.exe -instances=realm-rn-dj:europe-west1:realm-django=tcp:8000
 # CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # CMD gunicorn -b :8080 base.wsgi:application --timeout 0
-CMD gunicorn --bind :8080 --workers 1 --threads 8 app:app
+CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # CMD gunicorn -b :8080 main:app
 # RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
 # RUN chmod +x cloud_sql_proxy
