@@ -1,24 +1,24 @@
 steps:
-      docker pull gcr.io/cloudsql-docker/gce-proxy:1.33.1
+      docker pull eu.gcr.io/cloudsql-docker/gce-proxy:1.33.1
   - id: "docker-build"
-    name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
+    name: "eu.gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
     # , "gcr.io/cloudsql-docker/gce-proxy:1.33.1"
 
   - id: "docker-push"
-    name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
+    name: "eu.gcr.io/cloud-builders/docker"
+    args: ["push", "eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
 
   - id: "docker-layer"
-    name: "gcr.io/cloud-builders/docker"
+    name: "eu.gcr.io/cloud-builders/docker"
     entrypoint: /bin/bash
     args:
       - '-c'
       - |
-        echo "FROM gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA
-        COPY --from=gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
+        echo "FROM eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA
+        COPY --from=eu.gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
 
-        docker build -f Dockerfile-proxy -t gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA-proxy .
+        docker build -f Dockerfile-proxy -t eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA-proxy .
 
   # # For TCP connections
   # - id: "migrate-tcp"
