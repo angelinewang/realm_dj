@@ -255,3 +255,45 @@ https://django-storages.readthedocs.io/en/latest/backends/gcloud.html
 
 #### When connecting through python manage.py runserver 8080
 = SQL Instance connects and through angeline@realmpartyapp.com
+
+### WEDNESDAY 
+1. Get docker command working
+2. 
+[](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#windows)
+
+
+### Postgres PORT 
+5432
+
+### PORTS
+Port for Server: 8080
+Host for Server: 0.0.0.0/localhost
+Port for Database: 5432
+Host for Database: <Public IP for SQL Instance>
+
+The same port number used with different hosts indicate different addresses
+
+Proxy is on the user's local machine so it is hosted at localhost 
+--> But it is directed to the public ip address of the remote database
+
+### Allowing Public IP on Cloud SQL Instance
+Means that connections are only allowed to go outbound to that public ip FROM a cloud sql proxy OR from specified ip addresses
+FROM PORT
+
+### Connect to a TCP Socket using Python 
+(https://cloud.google.com/sql/docs/postgres/samples/cloud-sql-postgres-sqlalchemy-connect-tcp)
+--> Connect to TCP Socket where the SQL Instance with Postgres Database lies through Cloud SQL Proxy on Windows 
+
+1. Add file with config for tcp connection 
+2. Call function to connect to tcp socket for instance THROUGH Cloud SQL Proxy FROM Dockerfile
+
+SPECIFIED
+TCP specified after cloud sql proxy call is the TCP Socket for the DATABASE 
+--> This is the address it is connecting TO 
+
+connect tcp socket turns the Public IP of the Instance INTO a tcp socket that can be connected to
+--> So the HOST is specified in the socket creation, and invoking Cloud SQL Proxy
+
+DEFAULT CONFIG
+The address the cloud sql proxy connects FROM is automatically the exact same PORT as the TCP Socket of the remote instance, and the HOST of the cloud sql proxy is localhost
+--> This is set by DEFAULT, not needed to be specified 
