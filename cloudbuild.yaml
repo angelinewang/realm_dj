@@ -1,12 +1,12 @@
 steps:
-      docker pull eu.gcr.io/cloudsql-docker/gce-proxy:1.33.1
+      docker pull gcr.io/cloudsql-docker/gce-proxy:1.33.1
   - id: "docker-build"
-    name: "eu.gcr.io/cloud-builders/docker"
+    name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
     # , "gcr.io/cloudsql-docker/gce-proxy:1.33.1"
 
   - id: "docker-push"
-    name: "eu.gcr.io/cloud-builders/docker"
+    name: "gcr.io/cloud-builders/docker"
     args: ["push", "eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA"]
 
   - id: "docker-layer"
@@ -16,7 +16,7 @@ steps:
       - '-c'
       - |
         echo "FROM eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA
-        COPY --from=eu.gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
+        COPY --from=gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
 
         docker build -f Dockerfile-proxy -t eu.gcr.io/realm-rn-dj/github.com/angelinewang/realm_dj:$COMMIT_SHA-proxy .
 
