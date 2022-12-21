@@ -7,7 +7,9 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
-# RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:8000
+# RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+# RUN chmod +x cloud_sql_proxy
+RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:5432
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
 #                "--uid", "uwsgi", \
 #                "--plugins", "python3", \
