@@ -2,7 +2,7 @@ steps:
       docker pull gcr.io/cloudsql-docker/gce-proxy:1.33.1
   - id: "docker-build"
     name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "eu.gcr.io/realm-rn-dj/realm_dj/realm-dj-2:$COMMIT_SHA"]
+    args: ["build", "-t", "gcr.io/realm-rn-dj/realm_dj:$COMMIT_SHA"]
     # , "gcr.io/cloudsql-docker/gce-proxy:1.33.1"
 
   - id: "docker-push"

@@ -18,17 +18,21 @@ RUN poetry install --only main
 #     && chmod +x cloud_sql_proxy \
 #     && mkdir /cloudsql;
 
-# # Expects cred-file.json to be in working directory.
-# # This isn't good, but I haven't had time to improve yet.
-# COPY . /cloudsql
-CMD ["./cloud_sql_proxy", "-instances=realm-rn-dj:europe-west1:realm_django=tcp:35.195.57.236:5432"]
-# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
-# CMD gunicorn -b :8080 main:app
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
+RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:5432
 # RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
 # RUN chmod +x cloud_sql_proxy
 # RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:5432
+# # Expects cred-file.json to be in working directory.
+# # This isn't good, but I haven't had time to improve yet.
+# COPY . /cloudsql
+# CMD ["./cloud_sql_proxy", "-instances=realm-rn-dj:europe-west1:realm_django=tcp:35.195.57.236:5432"]
+# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
+CMD gunicorn -b :8080 main:app
+
 # CMD [ "uwsgi", "--socket", "0.0.0.0:3031", \
-#                "--uid", "uwsgi", \
+            #    "--uid", "uwsgi", \
 #                "--plugins", "python3", \
 #                "--protocol", "uwsgi", \
 #                "--wsgi", "main:application" ]
