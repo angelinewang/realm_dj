@@ -1,4 +1,4 @@
-FROM python: 30.10
+FROM python:3.10
 
 RUN apt-get install bash
 RUN mkdir -p /usr/src/app
