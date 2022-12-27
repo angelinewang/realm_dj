@@ -17,9 +17,11 @@ RUN ln -sf /dev/stdout /var/log/access.log && \
     ln -sf /dev/stderr /var/log/error.log
 
 ADD . /usr/src/app
+CMD gunicorn -b :8080 main:app
+# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # ENTRYPOINT ["/run.sh"]
 # CMD gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 base.wsgi:application
-CMD gunicorn --bind :8080 main:app --timeout 0 
+# CMD gunicorn --bind :8080 main:app --timeout 0 
 # # FROM python:3.10
 # # RUN mkdir /app 
 # # COPY . /app
