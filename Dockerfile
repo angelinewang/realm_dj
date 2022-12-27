@@ -17,7 +17,8 @@ RUN ln -sf /dev/stdout /var/log/access.log && \
     ln -sf /dev/stderr /var/log/error.log
 
 ADD . /usr/src/app
-ENTRYPOINT ["/run.sh"]
+# ENTRYPOINT ["/run.sh"]
+CMD gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 base.wsgi:application
 
 # # FROM python:3.10
 # # RUN mkdir /app 
