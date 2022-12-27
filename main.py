@@ -17,3 +17,5 @@ from base.wsgi import application as app
 if __name__ == "__main__":
     app.run(port=int(os.environ.get("DBPORT", "8000")),
             host=os.environ.get("DBHOST", "35.195.57.236"), debug=False)
+
+#gunicorn
