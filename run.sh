@@ -6,6 +6,6 @@
 sleep 1
 
 # Start the server 
-/usr/local/bin/gunicorn -w 2 -b :8080 base.wsgi:application
+/usr/local/bin/gunicorn -w 2 -b :8080 base.wsgi:app
 
 # Testing with service account cloudrun
