@@ -6,7 +6,7 @@
 sleep 1
 
 # Start the server 
-/usr/local/bin/gunicorn/base.wsgi:application -w 2 -b :8080 base.wsgi:application
+/usr/local/bin/gunicorn/main:app -w 2 -b :8080 
 
 # After PORT, must run the "application" variable inside base.wsgi
 # This is often remained main for App Engine
