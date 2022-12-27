@@ -142,7 +142,7 @@ DATABASES = {
         # PORT not needed in production code for DB, PORT only needed for container 
         'USER': 'angeline',
         'PASSWORD': 'blueLilacs8830',
-        # 'INSTANCE': 'realm-django',
+        'INSTANCE': 'realm-django',
         'NAME': 'realm_prod_db',
         # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '8000',
