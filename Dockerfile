@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY pyproject.toml /usr/src/app/
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create true
-RUN poetry install --only main
+RUN poetry install
 # base.wsgi:application to replace "main" if current deployment does not work
 
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/src/app/cloud_sql_proxy
