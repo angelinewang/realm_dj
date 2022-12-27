@@ -297,3 +297,32 @@ connect tcp socket turns the Public IP of the Instance INTO a tcp socket that ca
 DEFAULT CONFIG
 The address the cloud sql proxy connects FROM is automatically the exact same PORT as the TCP Socket of the remote instance, and the HOST of the cloud sql proxy is localhost
 --> This is set by DEFAULT, not needed to be specified 
+
+### Lessons
+1. Next time before doing something new, do research first, and make a step by step plan for how to use that new thing
+
+### Django for Google Cloud
+VM  
+1. run.sh
+```
+python manage.py migrate
+python manage.py collectstatic 
+
+/usr/local/bin/gunicorn kristian.wsgi:application -w 2 -b :$PORT
+```
+
+Cloud Run
+2. run.sh
+```
+/usr/local/bin/gunicorn base.wsgi:application -w 2 -b :8080
+```
+
+./cloud_sql_proxy -instances=realm-rn-dj:europe-west1:realm-django=tcp:8000 -credential_file=./db-proxy.json
+
+--> To run the proxy on the Terminal
+
+Postgres is run locally at 5432, and that is why that port is taken
+
+Proxy is automatically connected to postgres user and postgres database locally, not the realm_django database
+
+angeline is a new user created for the realm-django instance and granted access to the postgres database 
