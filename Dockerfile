@@ -1,9 +1,13 @@
 FROM python:3.10
 
 RUN apt-get install bash
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir /usr/src/app
+COPY . /usr/src/app
+
 COPY pyproject.toml /usr/src/app/
+WORKDIR /usr/src/app
+ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create true
 RUN poetry install --only main
@@ -15,6 +19,8 @@ RUN chmod +x /usr/src/app/cloud_sql_proxy
 
 RUN ln -sf /dev/stdout /var/log/access.log && \
     ln -sf /dev/stderr /var/log/error.log
+
+RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:8000 -credential_file=secrets/db-proxy.json &
 
 ADD . /usr/src/app
 CMD gunicorn -b :8080 main:app
