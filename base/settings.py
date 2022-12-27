@@ -140,7 +140,7 @@ DATABASES = {
         'HOST': 'localhost',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
-        'USER': 'postgres',
+        'USER': 'angeline',
         'PASSWORD': 'blueLilacs8830',
         # 'INSTANCE': 'realm-django',
         'NAME': 'realm_prod_db',
