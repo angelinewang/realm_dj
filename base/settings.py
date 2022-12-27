@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
     'jsonify',
     'flask',
-    'gunicorn',
+    # 'gunicorn',
     'storages',
 
     'corsheaders',
