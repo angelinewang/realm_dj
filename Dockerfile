@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /var/log/access.log && \
 
 ADD . /usr/src/app
 CMD gunicorn -b :8080 main:app
-# Gunicorn
+# Gunicorn another try
 # CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
 # ENTRYPOINT ["/run.sh"]
 # CMD gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 base.wsgi:application
