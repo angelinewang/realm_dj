@@ -16,7 +16,7 @@ RUN ln -sf /dev/stdout /var/log/access.log && \
     ln -sf /dev/stderr /var/log/error.log
 
 ADD . /usr/src/app
-CMD ["./run.sh"]
+CMD ["/run.sh"]
 
 # # FROM python:3.10
 # # RUN mkdir /app 
