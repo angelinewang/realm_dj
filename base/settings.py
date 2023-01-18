@@ -137,7 +137,7 @@ DATABASES = {
     'default': {
         # 
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '35.195.57.236',
+        'HOST': '/cloudsql/realm-rn-dj:europe-west1:realm-django',
         # The HOST is the Cloud SQL Public IP
         # PORT not needed in production code for DB, PORT only needed for container
         'USER': 'angeline',
@@ -150,9 +150,9 @@ DATABASES = {
     # "default": env.db()
 }}
 # If the flag as been set, configure to use proxy
-if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
-    DATABASES["default"]["HOST"] = "127.0.0.1"
-    DATABASES["default"]["PORT"] = 8000
+# if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
+#     DATABASES["default"]["HOST"] = "127.0.0.1"
+#     DATABASES["default"]["PORT"] = 8000
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
