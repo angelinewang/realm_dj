@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
 
 RUN pip3 install poetry
-RUN poetry config virtualenvs.create true
+RUN poetry config virtualenvs.create false
 RUN poetry install --only main
 # base.wsgi:application to replace "main" if current deployment does not work
 
