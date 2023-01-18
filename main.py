@@ -15,7 +15,7 @@ from base.wsgi import application as app
 # if __name__ == "__main__":
 #     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 if __name__ == "__main__":
-    app.run(port=int(os.environ.get("8080")),
+    app.run(port=int("8080"),
             host=os.environ.get("DBHOST", "35.195.57.236"), debug=False)
 
 #gunicorn
