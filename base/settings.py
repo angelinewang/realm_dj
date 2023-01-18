@@ -137,28 +137,18 @@ DATABASES = {
     'default': {
         # 
         'ENGINE': 'django.db.backends.postgresql',
-        # 'HOST': '127.0.0.1',
-        # 'DBHOST': '127.0.0.1',
-        # 'DB_HOST': '127.0.0.1',
         'HOST': '35.195.57.236',
-        # The HOST is the Cloud SQL Public IP 
-        # PORT not needed in production code for DB, PORT only needed for container 
+        # The HOST is the Cloud SQL Public IP
+        # PORT not needed in production code for DB, PORT only needed for container
         'USER': 'angeline',
-        'DBUSER': 'angeline',
-        'DB_USER': 'angeline',
         'PASSWORD': 'blueLilacs8830',
         'INSTANCE': 'realm-django',
         'NAME': 'realm_prod_db',
-        'DBNAME': 'realm_prod_db',
-        'DB_NAME': 'realm_prod_db',
-        # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
+        # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '8000',
-        'DBPORT': '8000',
-        'DB_PORT': '8000',
-    }
     # Use django-environ to parse the connection string
     # "default": env.db()
-}
+}}
 # If the flag as been set, configure to use proxy
 # if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
 #     DATABASES["default"]["HOST"] = "127.0.0.1"
