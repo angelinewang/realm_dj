@@ -4,14 +4,14 @@ RUN apt-get install bash
 RUN mkdir /usr/src/app
 COPY . /usr/src/app
 
-COPY pyproject.toml /usr/src/app/
+# COPY pyproject.toml /usr/src/app/
 WORKDIR /usr/src/app
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
 
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main
-RUN poetry lock [--no-update]
+# RUN poetry lock [--no-update]
 # base.wsgi:application to replace "main" if current deployment does not work
 
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/src/app/cloud_sql_proxy
