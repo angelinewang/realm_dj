@@ -142,17 +142,17 @@ DATABASES = {
         # PORT not needed in production code for DB, PORT only needed for container
         'USER': 'angeline',
         'PASSWORD': 'blueLilacs8830',
-        'INSTANCE': 'realm-django',
+        # 'INSTANCE': 'realm-django',
         'NAME': 'realm_prod_db',
-        # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
+        # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '8000',
     # Use django-environ to parse the connection string
     # "default": env.db()
 }}
 # If the flag as been set, configure to use proxy
-# if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
-#     DATABASES["default"]["HOST"] = "127.0.0.1"
-#     DATABASES["default"]["PORT"] = 5432
+if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
+    DATABASES["default"]["HOST"] = "127.0.0.1"
+    DATABASES["default"]["PORT"] = 8000
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
