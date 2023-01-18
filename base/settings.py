@@ -137,8 +137,8 @@ DATABASES = {
     'default': {
         # 
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '127.0.0.1',
-        # 'HOST': '35.195.57.236',
+        # 'HOST': '127.0.0.1',
+        'HOST': '35.195.57.236',
         # The HOST is the Cloud SQL Public IP 
         # PORT not needed in production code for DB, PORT only needed for container 
         'USER': 'angeline',
