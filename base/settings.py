@@ -145,7 +145,7 @@ DATABASES = {
         'PASSWORD': 'blueLilacs8830',
         'INSTANCE': 'realm-django',
         'NAME': 'realm_prod_db',
-        # # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
+        # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
         'PORT': '8000',
     }
     # Use django-environ to parse the connection string
