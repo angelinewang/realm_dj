@@ -23,7 +23,7 @@ RUN ln -sf /dev/stdout /var/log/access.log && \
 RUN ./cloud_sql_proxy -instances="realm-rn-dj:europe-west1:realm-django"=tcp:8000 -credential_file=secrets/db-proxy.json &
 
 ADD . /usr/src/app
-CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app
+CMD gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 base.wsgi:application
 
 # CMD gunicorn -b :8080 main:app
 # Gunicorn another try
