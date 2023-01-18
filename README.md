@@ -326,3 +326,13 @@ Postgres is run locally at 5432, and that is why that port is taken
 Proxy is automatically connected to postgres user and postgres database locally, not the realm_django database
 
 angeline is a new user created for the realm-django instance and granted access to the postgres database 
+
+## Container Images
+Deploy to a service for 1st time 
+= Creates 1st revision 
+Revisions
+= Immutable 
+
+Deploy from a container image tag 
+= Will be resolved to a digest 
+--> The revision will always serve this particular digest
