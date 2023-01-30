@@ -336,3 +336,8 @@ Revisions
 Deploy from a container image tag 
 = Will be resolved to a digest 
 --> The revision will always serve this particular digest
+
+## Connect Cloud Run to CloudSQL Postgres
+https://www.youtube.com/watch?v=vMQPrVRBGdQ
+--> Cloud Auth Proxy runs automatically through Cloud Run 
+--> Just need to change database host to "/cloudsql/*connection name*"
