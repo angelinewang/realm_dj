@@ -341,3 +341,8 @@ Deploy from a container image tag
 https://www.youtube.com/watch?v=vMQPrVRBGdQ
 --> Cloud Auth Proxy runs automatically through Cloud Run 
 --> Just need to change database host to "/cloudsql/*connection name*"
+
+## Connect to Cloud SQL Locally 
+Change database "Host" in settings.py to the public IP of the Cloud SQL instance, instead of the cloudsql connection 
+--> When running python manage.py migrate locally on terminal 
+--> Must close DBeaver accessing the same database 

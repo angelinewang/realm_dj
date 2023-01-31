@@ -137,7 +137,9 @@ DATABASES = {
     'default': {
         # 
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '/cloudsql/realm-rn-dj:europe-west1:realm-django',
+        'HOST': '35.195.57.236',
+
+        # 'HOST': '/cloudsql/realm-rn-dj:europe-west1:realm-django',
         # The HOST is the Cloud SQL Public IP
         # PORT not needed in production code for DB, PORT only needed for container
         'USER': 'postgres',
