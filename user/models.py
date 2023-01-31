@@ -65,7 +65,7 @@ class CustomUser(AbstractUser):
     # validators = [validate_file_extension]
     # profile_picture = models.ImageField(
     #     null=True, storage=fs)
-    profile_picture = models.FileField()
+    profile_picture = models.FileField(null=True)
     profile_picture_data = models.BinaryField(null=True)
     # url = models.CharField(max_length=255, unique=True)
     role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest))
