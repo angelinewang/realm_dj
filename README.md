@@ -351,3 +351,7 @@ Change database "Host" in settings.py to the public IP of the Cloud SQL instance
 https://www.crunchydata.com/blog/using-postgresqls-bytea-type-with-django
 
 ## Converting raw binary data of image in Django 
+
+## Deploying backend 
+Each time changes are made, backend needs to be manually deployed through Cloud Run 
+--> Even though Docker is automatically built, the apis still need to be manually deployed

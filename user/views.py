@@ -46,8 +46,8 @@ class RegisterView(generics.CreateAPIView):
         # UNIQUE Constraint added to the "email" column of user_customuser table
         # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
         # print(request.data.get('email'))
-        # profile_picture = request.data.get('profile_picture')
-        profile_picture_data = request.data.get('profile_picture')
+        profile_picture = request.data.get('profile_picture')
+        # profile_picture_data = request.data.get('profile_picture')
         email = request.data.get('email')
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
@@ -55,7 +55,7 @@ class RegisterView(generics.CreateAPIView):
         gender = request.data.get('gender')
         name = request.data.get('name')
 
-        print(profile_picture_data)
+        print(profile_picture)
    
         print(email)
         print(password)
@@ -69,10 +69,10 @@ class RegisterView(generics.CreateAPIView):
         # user = self.get_user(email)
 
         if serializer.is_valid():
-        
-            uploaded = serializer.save()
-            uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
-            uploaded.save()
+            serializer.save()
+            # uploaded = serializer.save()
+            # uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
+            # uploaded.save()
             return Response({'message': 'Registration Successful'})
         
         return Response(serializer.errors, status=422)
