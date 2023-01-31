@@ -130,15 +130,15 @@ class UpdatePhotoSerializer(serializers.ModelSerializer):
 #     def get_file_extension(self, file_name, decoded_file):
 #         import imghdr
 
+
 class UserSignUpSerializer(serializers.ModelSerializer):
     permission_classes = [permissions.AllowAny]
     password = serializers.CharField(write_only=True)
     # password_confirmation = serializers.CharField(write_only=True)
     # profile_picture = Base64ImageField(max_length=None, use_url=True)
     # print(profile_picture)
+
     def validate(self, data):
-        # try:
-        #     drawing = open(data.pop('profile_picture', 'rb').read())
         password = data.pop('password')
         # password_confirmation = data.pop('password_confirmation')
 
