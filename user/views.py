@@ -62,6 +62,7 @@ class RegisterView(generics.CreateAPIView):
         print(department)
         print(gender)
         print(name)
+        print(profile_picture.file.read())
 
         # Birthdate must be in the format: YYYY-MM-DD
 
