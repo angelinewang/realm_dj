@@ -52,7 +52,7 @@ class CustomUser(AbstractUser):
         def get_value(cls, member):
             return member.value[0]
 
-    username = models.CharField(null=True, unique=True, max_length=100)
+    username = models.CharField(null=True, unique=True, max_length=50)
 
     name = models.CharField(null=True, blank=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,8 +65,8 @@ class CustomUser(AbstractUser):
     # validators = [validate_file_extension]
     # profile_picture = models.ImageField(
     #     null=True, storage=fs)
-    profile_picture = models.FileField(null=True, blank=True, max_length=100)
-    profile_picture_data = models.BinaryField(null=True)
+    profile_picture = models.FileField(null=True, blank=True, max_length=500)
+    profile_picture_data = models.BinaryField(null=True, max_length=500)
     # url = models.CharField(max_length=255, unique=True)
     role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest))
 
