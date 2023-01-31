@@ -13,9 +13,22 @@ import urllib
 
 from django.core.files.storage import FileSystemStorage
 
+from storages.backends.gcloud import GoogleCloudStorage
+storage = GoogleCloudStorage()
+
 fs = FileSystemStorage(location='/profile_pictures')
 
 # from rest_framework.authtoken.models import Token
+
+class Upload:
+    @staticmethod
+    def upload_image(file, filename):
+        try:
+            target_path = '/images/' + filename
+            path = storage.save(target_path, file)
+            return storage.url(path)
+        except Exception as e:
+            print("Failed to upload!")
 
 class CustomUser(AbstractUser):
     class GENDER(Enum):

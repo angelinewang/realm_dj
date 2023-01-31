@@ -22,6 +22,9 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.files import File
 import urllib 
 
+from storages.backends.gcloud import GoogleCloudStorage
+storage = GoogleCloudStorage()
+
 from datetime import datetime, timedelta
 import pytz
 
@@ -47,8 +50,16 @@ class RegisterView(generics.CreateAPIView):
         # UNIQUE Constraint added to the "email" column of user_customuser table
         # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
         # print(request.data.get('email'))
-        profile_picture = request.data.get('profile_picture')
+        # profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
+
+        # target_path = 'images' + email
+        # path = storage.save(target_path, profile_picture)
+
+        # profile_picture_data = storage.url(path)
+        profile_picture = request.FILES['profile_picture']
+        profile_picture_data = Upload.upload_image(profile_picture, profile_picture.name)
+        
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
         department = request.data.get('department')
@@ -62,7 +73,6 @@ class RegisterView(generics.CreateAPIView):
         print(department)
         print(gender)
         print(name)
-        print(profile_picture.file.read())
 
         # Birthdate must be in the format: YYYY-MM-DD
 
