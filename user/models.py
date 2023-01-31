@@ -54,7 +54,7 @@ class CustomUser(AbstractUser):
 
     username = models.CharField(null=True, unique=True, max_length=50)
 
-    name = models.CharField(null=True, blank=True, max_length=100)
+    name = models.CharField(null=True, blank=True, max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none))
