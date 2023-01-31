@@ -52,7 +52,7 @@ class RegisterView(generics.CreateAPIView):
         # print(request.data.get('email'))
         profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
-        file_image = request.data.FILES['file_image']
+        file_image = request.data.get('file_image')
 
         # target_path = 'images' + email
         # path = storage.save(target_path, profile_picture)
