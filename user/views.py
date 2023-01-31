@@ -58,7 +58,7 @@ class RegisterView(generics.CreateAPIView):
 
         # profile_picture_data = storage.url(path)
         profile_picture = request.FILES['profile_picture']
-        profile_picture_data = Upload.upload_image(profile_picture, profile_picture.name)
+        profile_picture_data = User.Upload.upload_image(profile_picture, profile_picture.name)
         
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
@@ -67,6 +67,7 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
+        print(profile_picture_data)
         print(email)
         print(password)
         print(birthdate)
