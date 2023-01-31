@@ -32,12 +32,13 @@ User = get_user_model()
 
 # Class based views for User Authentication
 
+
 class RegisterView(generics.CreateAPIView):
     # Signup Page
     queryset = User.objects.all()
-    serializer_class = UserSignUpSerializer
+    serializer_class = UserSerializer
     parser_classes = (MultiPartParser, FormParser)
- 
+
     # permission_classes = [permissions.AllowAny]
     def post(self, request):
         serializer = UserSignUpSerializer(data=request.data)
@@ -47,7 +48,6 @@ class RegisterView(generics.CreateAPIView):
         # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
         # print(request.data.get('email'))
         profile_picture = request.data.get('profile_picture')
-        # profile_picture_data = request.data.get('profile_picture')
         email = request.data.get('email')
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
@@ -66,9 +66,6 @@ class RegisterView(generics.CreateAPIView):
         # Birthdate must be in the format: YYYY-MM-DD
 
         # user = self.get_user(email)
-        # uploaded = serializer.save()
-        # uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
-        # uploaded.save()
 
         if serializer.is_valid():
             serializer.save()
