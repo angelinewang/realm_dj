@@ -56,7 +56,7 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
-        print(profile_picture_data)
+   
         print(email)
         print(password)
         print(birthdate)
