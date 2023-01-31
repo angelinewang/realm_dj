@@ -83,6 +83,7 @@ class CustomUser(AbstractUser):
     # url = models.CharField(max_length=255, unique=True)
     role = models.IntegerField(choices=[x.value for x in ROLE], default=ROLE.get_value(ROLE.guest))
 
+    file_image = models.FileField(null=True)
     def __str__(self):
         return f"{self.id}: {self.name}"
     

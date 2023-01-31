@@ -50,14 +50,16 @@ class RegisterView(generics.CreateAPIView):
         # UNIQUE Constraint added to the "email" column of user_customuser table
         # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
         # print(request.data.get('email'))
-        # profile_picture = request.data.get('profile_picture')
+        profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
+        file_image = request.FILES['file_image']
 
         # target_path = 'images' + email
         # path = storage.save(target_path, profile_picture)
 
         # profile_picture_data = storage.url(path)
-        profile_picture = request.FILES['profile_picture']
+        # profile_picture = request.FILES['profile_picture']
+
         # profile_picture_data = User.Upload.upload_image(profile_picture, profile_picture.name)
         
         password = request.data.get('password')
@@ -67,6 +69,7 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
+        print(file_image)
         # print(profile_picture_data)
         print(email)
         print(password)
