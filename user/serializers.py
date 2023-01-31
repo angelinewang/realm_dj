@@ -137,8 +137,8 @@ class UserSignUpSerializer(serializers.ModelSerializer):
     # profile_picture = Base64ImageField(max_length=None, use_url=True)
     # print(profile_picture)
     def validate(self, data):
-        try:
-            drawing = open(data.pop('profile_picture', 'rb').read())
+        # try:
+        #     drawing = open(data.pop('profile_picture', 'rb').read())
         password = data.pop('password')
         # password_confirmation = data.pop('password_confirmation')
 
