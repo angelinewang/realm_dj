@@ -47,6 +47,8 @@ class RegisterView(generics.CreateAPIView):
         # If email entered already exists, will through Error: "Key (email)=(testing@kcl.ac.uk) already exists."
         # print(request.data.get('email'))
         profile_picture = request.data.get('profile_picture')
+        profile_picture_data = request.cleaned_data['profile_picture'].file.read(
+        )
         email = request.data.get('email')
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
@@ -55,6 +57,7 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
+        print(profile_picture_data)
         print(email)
         print(password)
         print(birthdate)

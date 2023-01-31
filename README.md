@@ -346,3 +346,8 @@ https://www.youtube.com/watch?v=vMQPrVRBGdQ
 Change database "Host" in settings.py to the public IP of the Cloud SQL instance, instead of the cloudsql connection 
 --> When running python manage.py migrate locally on terminal 
 --> Must close DBeaver accessing the same database 
+
+## Saving Image Data in Django 
+https://www.crunchydata.com/blog/using-postgresqls-bytea-type-with-django
+
+## Converting raw binary data of image in Django 
