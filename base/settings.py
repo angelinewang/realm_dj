@@ -139,7 +139,6 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 
         'ENGINE': 'django.db.backends.postgresql',
 
         # DEVELOPMENT HOST...
