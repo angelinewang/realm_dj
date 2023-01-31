@@ -74,7 +74,6 @@ class RegisterView(generics.CreateAPIView):
             # uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
             # uploaded.save()
             return Response({'message': 'Registration Successful'})
-        
         return Response(serializer.errors, status=422)
 
 class LoginView(generics.ListCreateAPIView):
