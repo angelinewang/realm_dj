@@ -35,7 +35,7 @@ User = get_user_model()
 class RegisterView(generics.CreateAPIView):
     # Signup Page
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSignUpSerializer
     parser_classes = (MultiPartParser, FormParser)
  
     # permission_classes = [permissions.AllowAny]
@@ -56,7 +56,6 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
-   
         print(email)
         print(password)
         print(birthdate)
@@ -67,12 +66,12 @@ class RegisterView(generics.CreateAPIView):
         # Birthdate must be in the format: YYYY-MM-DD
 
         # user = self.get_user(email)
+        # uploaded = serializer.save()
+        # uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
+        # uploaded.save()
 
         if serializer.is_valid():
             serializer.save()
-            # uploaded = serializer.save()
-            # uploaded.profile_picture_data = serializer.cleaned_data['profile_picture'].file.read()
-            # uploaded.save()
             return Response({'message': 'Registration Successful'})
         return Response(serializer.errors, status=422)
 
