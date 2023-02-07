@@ -355,3 +355,10 @@ https://www.crunchydata.com/blog/using-postgresqls-bytea-type-with-django
 ## Deploying backend 
 Each time changes are made, backend needs to be manually deployed through Cloud Run 
 --> Even though Docker is automatically built, the apis still need to be manually deployed
+https://medium.com/@mohammedabuiriban/how-to-use-google-cloud-storage-with-django-application-ff698f5a740f
+
+https://www.crunchydata.com/blog/using-postgresqls-bytea-type-with-django
+
+https://medium.com/oceanize-geeks/react-native-expo-create-a-custom-image-upload-component-6838c00cc00e
+
+https://medium.com/@mohammedabuiriban/how-to-use-google-cloud-storage-with-django-application-ff698f5a740f
