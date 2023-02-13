@@ -88,12 +88,11 @@ class RegisterView(generics.CreateAPIView):
         return Response(serializer.errors, status=422)
 
 # Delete User Profile
-class DeleteProfile(generics.DestroyAPIView):
-    def delete(self, queryset=None):
-        # pk = self.kwargs.get('pk')
-        instance = get_object_or_404(id=7)
+class DeleteProfile(APIView):
+    def delete(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = User.objects.filter(id=pk)
         instance.delete()
-
         return Response({'message': 'Account deleted'})
 
 class LoginView(generics.ListCreateAPIView):
