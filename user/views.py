@@ -93,8 +93,8 @@ class DeleteProfile(generics.DestroyAPIView):
     queryset = get_user_model().objects.all()
 
     def delete(self, request, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        instance = get_user_model().objects.filter(id=pk)
+        # pk = self.kwargs.get('pk')
+        instance = get_user_model().objects.filter(id=7)
         instance.delete(instance)
 
         return Response({'message': 'Account deleted'})
