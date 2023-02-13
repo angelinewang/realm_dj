@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('delete/<int:pk>/', views.DeleteProfile.as_view()),  # POST only
     path('signup/', csrf_exempt(views.RegisterView.as_view())), # POST only
     path('login/', csrf_exempt(views.LoginView.as_view()),), # GET & POST 
     path('profile/<int:pk>/', views.ProfileDetail.as_view()), # GET & POST 

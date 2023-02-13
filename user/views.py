@@ -87,6 +87,18 @@ class RegisterView(generics.CreateAPIView):
             return Response({'message': 'Registration Successful'})
         return Response(serializer.errors, status=422)
 
+# Delete User Profile
+class DeleteProfile(generics.DestroyAPIView):
+    serializer_class = UserProfileSerializer
+    queryset = get_user_model().objects.all()
+
+    def destroy(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = get_user_model().objects.filter(id=pk)
+        instance.perform_destroy(instance)
+        
+        return Response({'message': 'Account deleted'})
+
 class LoginView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserLoginSerializer
