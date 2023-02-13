@@ -89,13 +89,10 @@ class RegisterView(generics.CreateAPIView):
 
 # Delete User Profile
 class DeleteProfile(generics.DestroyAPIView):
-    serializer_class = UserProfileSerializer
-    queryset = get_user_model().objects.all()
-
-    def delete(self, request, *args, **kwargs):
+    def delete(self, queryset=None):
         # pk = self.kwargs.get('pk')
-        instance = get_user_model().objects.filter(id=7)
-        instance.delete(instance)
+        instance = get_object_or_404(id=7)
+        instance.delete()
 
         return Response({'message': 'Account deleted'})
 
