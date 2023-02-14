@@ -362,3 +362,7 @@ https://www.crunchydata.com/blog/using-postgresqls-bytea-type-with-django
 https://medium.com/oceanize-geeks/react-native-expo-create-a-custom-image-upload-component-6838c00cc00e
 
 https://medium.com/@mohammedabuiriban/how-to-use-google-cloud-storage-with-django-application-ff698f5a740f
+
+### Models
+Setting Blank to True is what allows a field to be blank when the form is sent.
+https://github.com/encode/django-rest-framework/issues/6292
