@@ -67,11 +67,13 @@ class CustomUser(AbstractUser):
 
     username = models.CharField(null=True, unique=True, max_length=50)
 
-    name = models.CharField(null=True, blank=True, max_length=100)
+    name = models.CharField(null=True, blank=True, max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-    gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, default=GENDER.get_value(GENDER.none))
-    birthdate = models.DateTimeField(null=True)
+    gender = models.IntegerField(choices=[x.value for x in GENDER], null=True, blank=True, default=GENDER.get_value(GENDER.none))
+    # blank sets whether the field can be send back to form without being filled out 
+    
+    birthdate = models.DateTimeField(null=True, blank=True)
     department = models.IntegerField(null=True, choices=[x.value for x in DEPARTMENT])
     
     # ImageField is a File Object
