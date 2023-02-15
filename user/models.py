@@ -50,6 +50,7 @@ class CustomUser(AbstractUser):
             return member.value[0]
     
     class DEPARTMENT(Enum):
+        none = (0, 'None')
         arts_humanities = (1, 'Arts/Humanities')
         business = (2, 'Business')
         dentistry = (3, 'Dentistry')
