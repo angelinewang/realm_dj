@@ -141,9 +141,9 @@ DATABASES = {
 
         # DEVELOPMENT HOST...
         # To be connected to cloud sql proxy that is being un on local machine at port 8000
-        'HOST': '127.0.0.1',
+        # 'HOST': '127.0.0.1',
         # PRODUCTION HOST...
-        # 'HOST': '/cloudsql/realm-rn-dj:europe-west1:realm-django',
+        'HOST': '/cloudsql/realm-rn-dj:europe-west1:realm-django',
 
         # The HOST is the Cloud SQL Public IP
         # PORT not needed in production code for DB, PORT only needed for container
@@ -154,11 +154,11 @@ DATABASES = {
         # This PORT needs to be the SAME as the the one the cloud sql auth proxy is run on
 
         # PRODUCTION PORT...
-        # 'PORT': '5432',
+        'PORT': '5432',
 
         # DEVELOPMENT PORT...
         # TO be connected to cloud sql proxy at 8000
-        'PORT': '8000',
+        # 'PORT': '8000',
     # Use django-environ to parse the connection string
     # "default": env.db()
 }}
