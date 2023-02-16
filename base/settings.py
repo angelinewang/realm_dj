@@ -158,7 +158,7 @@ DATABASES = {
 
         # DEVELOPMENT PORT...
         # TO be connected to cloud sql proxy at 8000
-        'PORT': '8000',
+        'PORT': '3000',
     # Use django-environ to parse the connection string
     # "default": env.db()
 }}
