@@ -367,5 +367,10 @@ https://medium.com/@mohammedabuiriban/how-to-use-google-cloud-storage-with-djang
 Setting Blank to True is what allows a field to be blank when the form is sent.
 https://github.com/encode/django-rest-framework/issues/6292
 
+## DEVELOPMENT 
 ### Running the app locally for development
 https://cloud.google.com/python/django/run#windows_2
+1. settings.py HOST: 127.0.0.1, PORT: 8000
+2. cloud auth proxy run on PORT: 8000
+3. python manage.py runserver on PORT: 3000 (different to settings.py/auth proxy)
+--> Server must run on different PORT than database

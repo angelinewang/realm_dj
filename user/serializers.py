@@ -66,7 +66,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'password', 'name',
-                  'birthdate', 'department', 'profile_picture', 'gender', 'profile_picture_data', 'file_image')
+                  'birthdate', 'department', 'profile_picture', 'gender')
 
 class UserProfileSerializer(serializers.ModelSerializer):
     # Used to fetch User Role, Host Profile, and User Profile Page

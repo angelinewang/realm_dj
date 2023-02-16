@@ -246,13 +246,12 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMix
 
 class GuestsBrowseGuestMode(generics.ListAPIView):
     serializer_class = UserSerializer
-
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
-
         return User.objects.exclude(id=pk)
+
+    # return User.objects.all()
         # print(User.objects.get(id=pk).role)
-        
         # role = User.objects.get(id=pk).role
         # if role == 0:
 

@@ -14,11 +14,11 @@ urlpatterns = [
     # GETs the last party associated with user and sends ONLY the first entry as response 
     path('firstentry/<int:pk>/', views.FirstEntryView.as_view()),
 
-
     path('updatephoto/<int:pk>/', views.UpdatePhoto.as_view()),
 
     path('changerole/<int:pk>/', views.RoleChangeView.as_view()),
-    path('guests/browse/<int:pk>/guestmode/', views.GuestsBrowseGuestMode.as_view()), # GET only, when user state is guest
+    
+    path('guests/browse/<int:pk>/guestmode/', csrf_exempt(views.GuestsBrowseGuestMode.as_view())),  # GET only, when user state is guest
     # GET only, when user state is guest
 
     path('guests/browse/<int:party>/existinginvites/',
@@ -35,7 +35,7 @@ urlpatterns = [
 #     # GET only, when user state is guest
 #     path('guests/browse/<int:pk>/hostmode', views.GuestsBrowseHostMode.as_view()),
 ] 
-# ]
+# # ]
 
-if settings.DEBUG: 
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG: 
+#     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
