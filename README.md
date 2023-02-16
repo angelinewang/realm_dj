@@ -366,3 +366,6 @@ https://medium.com/@mohammedabuiriban/how-to-use-google-cloud-storage-with-djang
 ### Models
 Setting Blank to True is what allows a field to be blank when the form is sent.
 https://github.com/encode/django-rest-framework/issues/6292
+
+### Running the app locally for development
+https://cloud.google.com/python/django/run#windows_2
