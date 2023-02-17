@@ -250,6 +250,12 @@ class GuestsBrowseGuestMode(generics.ListAPIView):
         pk = self.kwargs.get('pk')
         return User.objects.exclude(id=pk)
     
+class DeleteAll(APIView):
+    # USE WITH CAUTION To fully clean out 'user' table
+    def delete(self, request, *args, **kwargs):
+        User.objects.all().delete()
+        return Response({'message': 'All accounts deleted'})
+    
 class ExistingInvitesView(generics.ListAPIView):
     serializer_class = InviteSerializer
     def get_queryset(self, *args, **kwargs):

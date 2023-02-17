@@ -27,9 +27,10 @@ SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
+# Use environment variable to set DEBUG to False, as solution to 500 error
 
 ALLOWED_HOSTS = [
-    
+
     'cloudsql-proxy',
     '35.195.57.236', # Cloud SQL Instance Public IP Address
     'realm-dj-34ezrkuhla-ew.a.run.app',
@@ -39,12 +40,17 @@ ALLOWED_HOSTS = [
     'localhost:8080',
     'localhost:4000',
     'localhost:5000',
-    'effb-82-0-186-223.eu.ngrok.io',
-    'kubernetes.docker.internal', 'localhost:8000', "http://localhost:3000",
-                 "exp://10.40.195.102:19000",
-                 "http://localhost:19002",
-                 "http://localhost:19000",
-                 "http://localhost:8000", "localhost", 'localhost']
+    'kubernetes.docker.internal', 
+    'localhost:8000', 
+    "http://localhost:3000",
+    "exp://10.40.195.102:19000",
+    "http://localhost:19002",
+    "http://localhost:19000",
+    "http://localhost:8000",
+    "localhost",
+    'localhost'
+
+    ]
 
 
 # Application definition

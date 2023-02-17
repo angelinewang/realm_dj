@@ -374,3 +374,8 @@ https://cloud.google.com/python/django/run#windows_2
 2. cloud auth proxy run on PORT: 8000
 3. python manage.py runserver on PORT: 3000 (different to settings.py/auth proxy)
 --> Server must run on different PORT than database
+
+## 500 Server Error in Production 
+Solution:
+Set Debug in settings.py with os.environ 
+And then added DEBUG variable into .env and into environment variables in Cloud Run deployment to set to 'False'

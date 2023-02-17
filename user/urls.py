@@ -7,6 +7,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # USE WITH CAUTION To fully clean out 'user' table
+    path('delete/all', views.DeleteAll.as_view()),
     path('delete/<int:pk>/', views.DeleteProfile.as_view()),  # POST only
     path('signup/', csrf_exempt(views.RegisterView.as_view())), # POST only
     path('login/', csrf_exempt(views.LoginView.as_view()),), # GET & POST 
