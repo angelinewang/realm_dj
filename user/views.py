@@ -249,12 +249,7 @@ class GuestsBrowseGuestMode(generics.ListAPIView):
     def get_queryset(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
         return User.objects.exclude(id=pk)
-
-    # return User.objects.all()
-        # print(User.objects.get(id=pk).role)
-        # role = User.objects.get(id=pk).role
-        # if role == 0:
-
+    
 class ExistingInvitesView(generics.ListAPIView):
     serializer_class = InviteSerializer
     def get_queryset(self, *args, **kwargs):
