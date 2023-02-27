@@ -52,31 +52,19 @@ class RegisterView(generics.CreateAPIView):
         # print(request.data.get('email'))
         profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
-        # file_image = request.data.get('file_image')
-
-        # target_path = 'images' + email
-        # path = storage.save(target_path, profile_picture)
-
-        # profile_picture_data = storage.url(path)
-        # profile_picture = request.FILES['profile_picture']
-
-        # profile_picture_data = User.Upload.upload_image(profile_picture, profile_picture.name)
-        
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
         department = request.data.get('department')
         gender = request.data.get('gender')
         name = request.data.get('name')
 
-        print(profile_picture)
-        # print(file_image)
-        # print(profile_picture_data)
-        print(email)
-        print(password)
-        print(birthdate)
-        print(department)
-        print(gender)
-        print(name)
+        print(f'Profile Picture {profile_picture}')
+        print(f'Email {email}')
+        print(f'Password {password}')
+        print(f'Birthdate {birthdate}')
+        print(f'Department {department}')
+        print(f'Gender {gender}')
+        print(f'Name {name}')
 
         # Birthdate must be in the format: YYYY-MM-DD
 
