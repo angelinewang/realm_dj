@@ -27,6 +27,8 @@ SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
+
+# DEBUG = False
 # Use environment variable to set DEBUG to False, as solution to 500 error
 
 ALLOWED_HOSTS = [

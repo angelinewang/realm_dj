@@ -52,7 +52,7 @@ class RegisterView(generics.CreateAPIView):
         # print(request.data.get('email'))
         profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
-        file_image = request.data.get('file_image')
+        # file_image = request.data.get('file_image')
 
         # target_path = 'images' + email
         # path = storage.save(target_path, profile_picture)
@@ -69,7 +69,7 @@ class RegisterView(generics.CreateAPIView):
         name = request.data.get('name')
 
         print(profile_picture)
-        print(file_image)
+        # print(file_image)
         # print(profile_picture_data)
         print(email)
         print(password)
