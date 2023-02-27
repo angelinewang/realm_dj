@@ -39,7 +39,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email', 'password', 'password_confirmation')
 
-
 class UserSerializer(serializers.ModelSerializer):
     permission_classes = [permissions.AllowAny]
     password = serializers.CharField(write_only=True)

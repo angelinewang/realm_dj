@@ -25,9 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-i!0(gmwm9jpd3c1bocjuwk_&fl5cly)q_h!m)wbo=xbt$gz!2l'
 SECRET_KEY = 'giyBtGiAiTKpsRxgNasNhDOCCglcPTxUGYJcmppgZzqgMujZAn'
 
+# Production Environment DEBUG setting
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
+# Development Environment DEBUG setting
 # DEBUG = False
 # Use environment variable to set DEBUG to False, as solution to 500 error
 
