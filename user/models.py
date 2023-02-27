@@ -76,9 +76,10 @@ class CustomUser(AbstractUser):
     # null = True, default = GENDER.get_value(GENDER.none)
     # blank sets whether the field can be send back to form without being filled out 
     
-    birthdate = models.DateTimeField(null=False, blank=True)
+    birthdate = models.DateTimeField(null=True, blank=True)
     department = models.IntegerField(null=True, choices=[x.value for x in DEPARTMENT])
     
+    birthday = models.DateTimeField(null=False, blank=True)
     # ImageField is a File Object
     # validators = [validate_file_extension]
     # profile_picture = models.ImageField(
