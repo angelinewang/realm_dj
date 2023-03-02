@@ -52,10 +52,11 @@ class RegisterView(generics.CreateAPIView):
         profile_picture = request.data.get('profile_picture')
         email = request.data.get('email')
         password = request.data.get('password')
+        birthdate = request.data.get('birthdate')
         department = request.data.get('department')
         gender = request.data.get('gender')
         name = request.data.get('name')
-        birthdate = request.data.get('birthdate')
+   
         # birthday = request.data.get('birthday')
 
         print(f'Profile Picture {profile_picture}')
