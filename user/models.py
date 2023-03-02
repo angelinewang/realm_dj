@@ -79,7 +79,7 @@ class CustomUser(AbstractUser):
     birthdate = models.DateTimeField(null=True, blank=True)
     department = models.IntegerField(null=True, choices=[x.value for x in DEPARTMENT])
     
-    birthday = models.DateTimeField(null=False, blank=True)
+    # birthday = models.DateTimeField(null=False, blank=True)
     # ImageField is a File Object
     # validators = [validate_file_extension]
     # profile_picture = models.ImageField(

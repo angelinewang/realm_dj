@@ -379,3 +379,6 @@ https://cloud.google.com/python/django/run#windows_2
 Solution:
 Set Debug in settings.py with os.environ 
 And then added DEBUG variable into .env and into environment variables in Cloud Run deployment to set to 'False'
+
+## Migrations 
+After applying migrations locally, DO NOT need to redeploy for migrations to be used in production 

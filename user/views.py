@@ -55,17 +55,17 @@ class RegisterView(generics.CreateAPIView):
         department = request.data.get('department')
         gender = request.data.get('gender')
         name = request.data.get('name')
-        # birthdate = request.data.get('birthdate')
-        birthday = request.data.get('birthday')
+        birthdate = request.data.get('birthdate')
+        # birthday = request.data.get('birthday')
 
         print(f'Profile Picture {profile_picture}')
         print(f'Email {email}')
         print(f'Password {password}')
-        # print(f'Birthdate {birthdate}')
+        print(f'Birthdate {birthdate}')
         print(f'Department {department}')
         print(f'Gender {gender}')
         print(f'Name {name}')
-        print(f'Birthday {birthday}')
+        # print(f'Birthday {birthday}')
 
         # Birthdate must be in the format: YYYY-MM-DD
 
