@@ -92,7 +92,7 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         password = data.pop('password')
-        print(data.get('birthdate'))
+        # print(data.get('birthdate'))
         # password_confirmation = data.pop('password_confirmation')
 
         # if password != password_confirmation:
