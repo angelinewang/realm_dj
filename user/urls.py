@@ -16,6 +16,8 @@ urlpatterns = [
     # GETs the last party associated with user and sends ONLY the first entry as response 
     path('firstentry/<int:pk>/', views.FirstEntryView.as_view()),
 
+    path('mypartyid/<int:pk>/', views.MyPartyIdView.as_view()),
+
     path('updatephoto/<int:pk>/', views.UpdatePhoto.as_view()),
 
     path('changerole/<int:pk>/', views.RoleChangeView.as_view()),

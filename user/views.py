@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from .serializers import UserLoginSerializer
-from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer, FirstEntrySerializer, UpdatePhotoSerializer
+from .serializers import UserProfileSerializer, UserRoleSerializer, UserSignUpSerializer, FirstEntrySerializer, UpdatePhotoSerializer, MyPartyIdSerializer
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
@@ -53,6 +53,7 @@ class RegisterView(generics.CreateAPIView):
         email = request.data.get('email')
         password = request.data.get('password')
         birthdate = request.data.get('birthdate')
+        
         department = request.data.get('department')
         gender = request.data.get('gender')
         name = request.data.get('name')
@@ -123,6 +124,15 @@ class UpdatePhoto(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin
             # serializer.save()
             # return Response({'message': 'Registration Successful'})
         return Response("Profile Photo Updated!")
+    
+class MyPartyId(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+    serializer_class = MyPartyIdSerializer
+    def get(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        parties = Party.objects.filter(host_id=pk)
+        myParty = parties.order_by('created_at').last()
+
+        return Response(myParty.id)
 
 class FirstEntryView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     # 1. Grab the last party associated to the user 

@@ -14,6 +14,12 @@ class FirstEntrySerializer(serializers.ModelSerializer):
         model = Party
         fields = ("first_entry")
 
+
+class MyPartyIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Party
+        fields = ("id")
+
 class UserLoginSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True)
