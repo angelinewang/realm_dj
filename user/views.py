@@ -125,7 +125,7 @@ class UpdatePhoto(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin
             # return Response({'message': 'Registration Successful'})
         return Response("Profile Photo Updated!")
     
-class MyPartyId(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
+class MyPartyIdView(generics.RetrieveUpdateDestroyAPIView, mixins.UpdateModelMixin):
     serializer_class = MyPartyIdSerializer
     def get(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
